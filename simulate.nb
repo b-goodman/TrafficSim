@@ -1,0 +1,3410 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    160519,       3402]
+NotebookOptionsPosition[    157422,       3317]
+NotebookOutlinePosition[    157763,       3332]
+CellTagsIndexPosition[    157720,       3329]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{"contains", " ", "some", " ", "missing", " ", 
+    RowBox[{"functions", ".", "  ", "Other"}], " ", "functions", " ", 
+    "updated", " ", "for", " ", "map", " ", "editor"}], " ", "-", " ", 
+   RowBox[{
+   "some", " ", "compatablily", " ", "issues", " ", "need", " ", "fixing"}]}],
+   " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.685382981971825*^9, 3.685382993159836*^9}, {
+  3.6853830241666527`*^9, 3.6853830660112934`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Graphics", "[", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"main", " ", "graphic"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"junctionData", "[", "\"\<graphics\>\"", "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", "terminals", " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", "points", " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"Red", ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Disk", "[", 
+          RowBox[{"#", ",", "1"}], "]"}], "&"}], "/@", 
+        RowBox[{"First", "/@", 
+         RowBox[{"junctionData", "[", "\"\<nodes\>\"", "]"}]}]}]}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", "lables", " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Inset", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+           "#", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], ",", 
+           "12", ",", "Bold"}], "]"}], ",", 
+         RowBox[{
+         "#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], "]"}],
+        "&"}], "/@", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Thread", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Range", "[", 
+             RowBox[{"Length", "[", "#", "]"}], "]"}], ",", "#"}], "}"}], 
+          "]"}], "&"}], "[", 
+        RowBox[{"First", "/@", 
+         RowBox[{"junctionData", "[", "\"\<nodes\>\"", "]"}]}], "]"}], 
+       ")"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"control", " ", "points"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", "paths", " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Dynamic", "[", 
+      RowBox[{"highlightPath", "/@", 
+       RowBox[{"Extract", "[", 
+        RowBox[{
+         RowBox[{"junctionData", "[", "\"\<pathPoints\>\"", "]"}], ",", 
+         RowBox[{"Position", "[", 
+          RowBox[{"controlIndicatorState", ",", "\"\<GO\>\""}], "]"}]}], 
+        "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", "indicators", " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Dynamic", "@", 
+      RowBox[{"Transpose", "[", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"controlIndicatorState", "/.", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"\"\<GO\>\"", "\[Rule]", "Green"}], ",", 
+            RowBox[{"\"\<STOP\>\"", "\[Rule]", "Red"}]}], "}"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Disk", "[", 
+            RowBox[{"#", ",", "1"}], "]"}], "&"}], "/@", 
+          RowBox[{"junctionData", "[", "\"\<controlPoints\>\"", "]"}]}]}], 
+        "\[IndentingNewLine]", "}"}], "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", "labels", " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Inset", "@@", "#"}], "&"}], "/@", 
+      RowBox[{"Transpose", "[", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"ToUpperCase", "/@", 
+          RowBox[{
+           RowBox[{"Alphabet", "[", "]"}], "\[LeftDoubleBracket]", 
+           RowBox[{"1", ";;", 
+            RowBox[{"Length", "[", 
+             RowBox[{"junctionData", "[", "\"\<controlPoints\>\"", "]"}], 
+             "]"}]}], "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"junctionData", "[", "\"\<controlPoints\>\"", "]"}]}], 
+        "\[IndentingNewLine]", "}"}], "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", "manipulators", " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Inset", "@@", "#"}], "&"}], "/@", 
+      RowBox[{"Transpose", "[", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"Button", "[", 
+            RowBox[{"\"\<\>\"", ",", 
+             RowBox[{"toggleIndicatorState", "[", "#", "]"}], ",", 
+             RowBox[{"ImageSize", "\[Rule]", 
+              RowBox[{"{", 
+               RowBox[{"15", ",", "15"}], "}"}]}], ",", 
+             RowBox[{"Appearance", "\[Rule]", "\"\<Frameless\>\""}]}], "]"}], 
+           "&"}], "/@", 
+          RowBox[{"Range", "[", 
+           RowBox[{"Length", "[", 
+            RowBox[{"junctionData", "[", "\"\<controlPoints\>\"", "]"}], 
+            "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"junctionData", "[", "\"\<controlPoints\>\"", "]"}]}], 
+        "\[IndentingNewLine]", "}"}], "]"}]}]}], "\[IndentingNewLine]", "}"}],
+    "]"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.6818003772805433`*^9, 3.6818003801547413`*^9}, {
+  3.6818004541198025`*^9, 3.6818004552204895`*^9}, {3.681800880869624*^9, 
+  3.6818008937773304`*^9}, {3.6818009607641335`*^9, 3.681800975452199*^9}, {
+  3.6818017391559243`*^9, 3.6818017741361723`*^9}, {3.6818020669606853`*^9, 
+  3.681802114979082*^9}, {3.681802793144643*^9, 3.681802826014064*^9}, {
+  3.681803316441846*^9, 3.6818033226688304`*^9}, {3.681803379789115*^9, 
+  3.6818034109809504`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"fov", "=", 
+    RowBox[{"Compile", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"position", ",", "_Real", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"rotation", ",", "_Real", ",", "0"}], "}"}]}], 
+       "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"viewRange", "=", "16"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"viewAngle", "=", 
+           RowBox[{"\[Pi]", "/", "5"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"x", "=", 
+           RowBox[{
+           "position", "\[LeftDoubleBracket]", "1", 
+            "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"y", "=", 
+           RowBox[{
+           "position", "\[LeftDoubleBracket]", "2", 
+            "\[RightDoubleBracket]"}]}]}], "\[IndentingNewLine]", "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"RotationTransform", "[", 
+          RowBox[{"rotation", ",", "position"}], "]"}], "@", 
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x", "+", "3"}], ",", 
+             RowBox[{"y", "+", "1"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x", "+", "viewRange"}], ",", 
+             RowBox[{"y", "+", "1", "+", 
+              RowBox[{"viewRange", "*", 
+               RowBox[{"Tan", "[", "viewAngle", "]"}]}]}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x", "+", "viewRange"}], ",", 
+             RowBox[{"y", "-", 
+              RowBox[{"(", 
+               RowBox[{"1", "+", 
+                RowBox[{"viewRange", "*", 
+                 RowBox[{"Tan", "[", "viewAngle", "]"}]}]}], ")"}]}]}], "}"}],
+            ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x", "+", "3"}], ",", 
+             RowBox[{"y", "-", "1"}]}], "}"}]}], "\[IndentingNewLine]", 
+          "}"}]}]}], "\[IndentingNewLine]", "]"}], ",", 
+      RowBox[{"CompilationTarget", "\[Rule]", "\"\<C\>\""}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"steeringAngle", "=", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", "\[Theta]", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Compile", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"pt", ",", "_Real", ",", "1"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"path", ",", "_Real", ",", "2"}], "}"}]}], 
+         "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"\[Theta]", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"ArcTan", "[", 
+            RowBox[{
+             RowBox[{
+             "#", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], ",", 
+             RowBox[{
+             "#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+            "]"}], "&"}], "@", 
+          RowBox[{"Flatten", "[", "\[IndentingNewLine]", 
+           RowBox[{"Differences", "/@", 
+            RowBox[{"Transpose", "[", 
+             RowBox[{"{", "\[IndentingNewLine]", 
+              RowBox[{"pt", ",", "\[IndentingNewLine]", 
+               RowBox[{"Extract", "[", 
+                RowBox[{"path", ",", "\[IndentingNewLine]", 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Position", "[", 
+                    RowBox[{"path", ",", 
+                    RowBox[{
+                    RowBox[{"Nearest", "[", 
+                    RowBox[{"path", ",", "pt", ",", "1"}], "]"}], 
+                    "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], 
+                    "]"}], "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], "+", "1"}], ")"}], 
+                    "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+                    ">", 
+                    RowBox[{"Length", "[", "path", "]"}]}], ",", 
+                   "\[IndentingNewLine]", "1", ",", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"Position", "[", 
+                    RowBox[{"path", ",", 
+                    RowBox[{
+                    RowBox[{"Nearest", "[", 
+                    RowBox[{"path", ",", "pt", ",", "1"}], "]"}], 
+                    "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], 
+                    "]"}], "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], "+", "1"}]}], 
+                  "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+                "]"}]}], "\[IndentingNewLine]", "}"}], "]"}]}], 
+           "\[IndentingNewLine]", "]"}]}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"{", 
+          RowBox[{"\[Theta]", ",", "_Real", ",", "1"}], "}"}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"CompilationTarget", "->", "\"\<C\>\""}]}], 
+       "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"getLeadingDriverID", "=", 
+    RowBox[{"Compile", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"driverPosition", ",", "_Real", ",", "1"}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"driverRotation", ",", "_Real", ",", "0"}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"allDriverPosition", ",", "_Real", ",", "2"}], "}"}]}], 
+       "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"xPoly", "=", 
+           RowBox[{
+           "driverPosition", "\[LeftDoubleBracket]", "1", 
+            "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"yPoly", "=", 
+           RowBox[{
+           "driverPosition", "\[LeftDoubleBracket]", "2", 
+            "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"nearestSample", "=", 
+           RowBox[{"Nearest", "[", 
+            RowBox[{"allDriverPosition", ",", "driverPosition", ",", 
+             RowBox[{"{", 
+              RowBox[{"All", ",", "20"}], "}"}]}], "]"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"viewRange", "=", "16"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"viewAngle", "=", 
+           RowBox[{"\[Pi]", "/", "5"}]}]}], "\[IndentingNewLine]", "}"}], ",",
+         "\[IndentingNewLine]", 
+        RowBox[{"With", "[", 
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{"z", "=", "\[IndentingNewLine]", 
+            RowBox[{"Pick", "[", "\[IndentingNewLine]", 
+             RowBox[{"nearestSample", ",", "\[IndentingNewLine]", 
+              RowBox[{"Map", "[", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"If", "[", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"Block", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    "Xi", ",", "Yi", ",", "Xip1", ",", "Yip1", ",", "u", ",", 
+                    "v", ",", "w"}], "}"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"Xi", ",", "Yi"}], "}"}], "=", 
+                    RowBox[{"Transpose", "[", "\[IndentingNewLine]", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{"FOV", " ", "polygon"}], " ", "*)"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"RotationTransform", "[", 
+                    RowBox[{"driverRotation", ",", "driverPosition"}], "]"}], 
+                    "[", 
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"xPoly", "+", "3"}], ",", 
+                    RowBox[{"yPoly", "+", "1"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"xPoly", "+", "viewRange"}], ",", 
+                    RowBox[{"yPoly", "+", "1", "+", 
+                    RowBox[{"viewRange", "*", 
+                    RowBox[{"Tan", "[", "viewAngle", "]"}]}]}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"xPoly", "+", "viewRange"}], ",", 
+                    RowBox[{"yPoly", "-", 
+                    RowBox[{"(", 
+                    RowBox[{"1", "+", 
+                    RowBox[{"viewRange", "*", 
+                    RowBox[{"Tan", "[", "viewAngle", "]"}]}]}], ")"}]}]}], 
+                    "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"xPoly", "+", "3"}], ",", 
+                    RowBox[{"yPoly", "-", "1"}]}], "}"}]}], 
+                    "\[IndentingNewLine]", "}"}], "]"}], 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(*", "**)"}], "\[IndentingNewLine]", "]"}]}], 
+                    ";", "\[IndentingNewLine]", 
+                    RowBox[{"Xip1", "=", 
+                    RowBox[{"RotateLeft", "[", "Xi", "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Yip1", "=", 
+                    RowBox[{"RotateLeft", "[", "Yi", "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"u", "=", 
+                    RowBox[{"UnitStep", "[", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}], "-", "Yi"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"v", "=", 
+                    RowBox[{"RotateLeft", "[", "u", "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"w", "=", 
+                    RowBox[{"UnitStep", "[", 
+                    RowBox[{"-", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"Xip1", "-", "Xi"}], ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}], "-", "Yi"}], ")"}]}], "-", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], "-", "Xi"}], ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"Yip1", "-", "Yi"}], ")"}]}]}], ")"}]}], "]"}]}], 
+                    ";", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Total", "[", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"u", " ", 
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", "v"}], ")"}], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", "w"}], ")"}]}], "-", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", "u"}], ")"}], " ", "v", " ", "w"}]}], 
+                    ")"}], "]"}], "\[NotEqual]", "0"}]}]}], 
+                    RowBox[{"(*", 
+                    RowBox[{"\[NotEqual]", " ", 
+                    RowBox[{"0", " ", "-", " ", 
+                    RowBox[{"False", " ", "if", " ", "0"}]}]}], " ", "*)"}], 
+                    "]"}], ",", "1", ",", "0"}], "]"}], "&"}], ",", 
+                "\[IndentingNewLine]", "nearestSample"}], 
+               "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+              "1"}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+           "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", "z", "]"}], ">", "0"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"Flatten", "[", "\[IndentingNewLine]", 
+              RowBox[{"Position", "[", "\[IndentingNewLine]", 
+               RowBox[{"allDriverPosition", ",", "\[IndentingNewLine]", 
+                RowBox[{"Flatten", "[", 
+                 RowBox[{"Nearest", "[", 
+                  RowBox[{"z", ",", "driverPosition"}], "]"}], "]"}]}], "]"}],
+               "]"}], "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+            ",", "\[IndentingNewLine]", "0"}], "\[IndentingNewLine]", "]"}]}],
+          "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}], ",", 
+      RowBox[{"CompilationTarget", "\[Rule]", "\"\<C\>\""}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"computeAcellerationDrivers", "=", 
+    RowBox[{"Compile", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"nearestID", ",", "_Integer", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"currentDriverPosition", ",", "_Real", ",", "1"}], "}"}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"currentDriverSpeed", ",", "_Real", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"currentDriverRotation", ",", "_Real", ",", "0"}], "}"}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"allDriverPositionList", ",", "_Real", ",", "2"}], "}"}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"allDriverSpeeds", ",", "_Real", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"driverParamaters", ",", "_Real", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"driverFollowingQ", ",", 
+          RowBox[{"True", "|", "False"}]}], "}"}]}], "\[IndentingNewLine]", 
+       "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"aNorm", "=", 
+           RowBox[{
+           "driverParamaters", "\[LeftDoubleBracket]", "1", 
+            "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"vLim", "=", 
+           RowBox[{
+           "driverParamaters", "\[LeftDoubleBracket]", "2", 
+            "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"stopGap", "=", 
+           RowBox[{
+           "driverParamaters", "\[LeftDoubleBracket]", "3", 
+            "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"b", "=", 
+           RowBox[{
+           "driverParamaters", "\[LeftDoubleBracket]", "4", 
+            "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"T", "=", 
+           RowBox[{
+           "driverParamaters", "\[LeftDoubleBracket]", "5", 
+            "\[RightDoubleBracket]"}]}]}], "\[IndentingNewLine]", "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", "\[IndentingNewLine]", 
+         RowBox[{"driverFollowingQ", ",", "\[IndentingNewLine]", 
+          RowBox[{"aNorm", "*", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"1", "-", 
+               SuperscriptBox[
+                RowBox[{"(", 
+                 FractionBox["currentDriverSpeed", "vLim"], ")"}], "4"]}], 
+              ")"}], "-", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"stopGap", "+", 
+                  RowBox[{"currentDriverSpeed", "*", "T"}], "+", 
+                  RowBox[{"(", 
+                   RowBox[{
+                    FractionBox["1", 
+                    RowBox[{"2", " ", 
+                    RowBox[{"Sqrt", "[", 
+                    RowBox[{"aNorm", "*", "b"}], "]"}]}]], 
+                    RowBox[{"currentDriverSpeed", " ", 
+                    RowBox[{"(", 
+                    RowBox[{"currentDriverSpeed", "-", 
+                    RowBox[{
+                    "allDriverSpeeds", "\[LeftDoubleBracket]", "nearestID", 
+                    "\[RightDoubleBracket]"}]}], ")"}]}]}], ")"}]}], ")"}], 
+                "/", 
+                RowBox[{"(", 
+                 RowBox[{"EuclideanDistance", "[", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"AngleVector", "[", 
+                    RowBox[{"currentDriverPosition", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"(*", 
+                    RowBox[{"car", " ", "length"}], "*)"}], 
+                    RowBox[{"3", ",", "currentDriverRotation"}], "}"}]}], 
+                    "]"}], ",", "\[IndentingNewLine]", 
+                   RowBox[{"Extract", "[", 
+                    RowBox[{"allDriverPositionList", ",", 
+                    RowBox[{"{", "nearestID", "}"}]}], "]"}]}], 
+                  "\[IndentingNewLine]", "]"}], ")"}]}], ")"}], "2"]}], 
+            ")"}]}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+          RowBox[{"aNorm", " ", 
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               FractionBox["currentDriverSpeed", "vLim"], ")"}], "4"]}], 
+            ")"}]}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+       "]"}], ",", 
+      RowBox[{"CompilationTarget", "\[Rule]", "\"\<C\>\""}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"computeAcellerationControls", "=", 
+    RowBox[{"Compile", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"currentDriverPosition", ",", "_Real", ",", "1"}], "}"}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"currentDriverSpeed", ",", "_Real", ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"currentDriverRotation", ",", "_Real", ",", "0"}], "}"}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"driverParamaters", ",", "_Real", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"controlPointLocation", ",", "_Real", ",", "1"}], "}"}]}], 
+       "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"aNorm", "=", 
+           RowBox[{
+           "driverParamaters", "\[LeftDoubleBracket]", "1", 
+            "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"vLim", "=", 
+           RowBox[{
+           "driverParamaters", "\[LeftDoubleBracket]", "2", 
+            "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"stopGap", "=", 
+           RowBox[{
+           "driverParamaters", "\[LeftDoubleBracket]", "3", 
+            "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"b", "=", 
+           RowBox[{
+           "driverParamaters", "\[LeftDoubleBracket]", "4", 
+            "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"T", "=", 
+           RowBox[{
+           "driverParamaters", "\[LeftDoubleBracket]", "5", 
+            "\[RightDoubleBracket]"}]}]}], "\[IndentingNewLine]", "}"}], ",", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"aNorm", "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               FractionBox["currentDriverSpeed", "vLim"], ")"}], "4"]}], 
+            ")"}], "-", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"0.5", "+", 
+                RowBox[{"currentDriverSpeed", "*", "T"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{
+                  FractionBox["1", 
+                   RowBox[{"2", " ", 
+                    RowBox[{"Sqrt", "[", 
+                    RowBox[{"aNorm", "*", "b"}], "]"}]}]], 
+                  "currentDriverSpeed", " ", 
+                  RowBox[{"(", "currentDriverSpeed", ")"}]}], ")"}]}], ")"}], 
+              "/", 
+              RowBox[{"(", 
+               RowBox[{"EuclideanDistance", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"AngleVector", "[", 
+                  RowBox[{"currentDriverPosition", ",", 
+                   RowBox[{"{", 
+                    RowBox[{"(*", 
+                    RowBox[{"car", " ", "length"}], "*)"}], 
+                    RowBox[{"3", ",", "currentDriverRotation"}], "}"}]}], 
+                  "]"}], ",", "controlPointLocation"}], "\[IndentingNewLine]",
+                 "]"}], ")"}]}], ")"}], "2"]}], ")"}]}]}], 
+       "\[IndentingNewLine]", "]"}], ",", 
+      RowBox[{"CompilationTarget", "\[Rule]", "\"\<C\>\""}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"stopControlInRangeQ", "=", 
+     RowBox[{"Function", "[", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+        "currentDriverPosition", ",", "\[IndentingNewLine]", 
+         "currentDriverAngle", ",", "\[IndentingNewLine]", 
+         "controlPointLocations", ",", "\[IndentingNewLine]", 
+         "currentDriverControlIndex", ",", "\[IndentingNewLine]", 
+         "allControlStates"}], "\[IndentingNewLine]", "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "returns", " ", "TRUE", " ", "if", " ", "exists", " ", "any", " ", 
+         "instance", " ", "of", " ", "control", " ", "point", " ", "in", " ", 
+         "range", " ", "and", " ", "set", " ", "to", " ", "\"\<STOP\>\""}], 
+        " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Total", "[", "\[IndentingNewLine]", 
+         RowBox[{"Boole", "[", "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+           "return", " ", "TRUE", " ", "for", " ", "each", " ", "instance", 
+            " ", "of", " ", "control", " ", "point", " ", "in", " ", "range", 
+            " ", "and", " ", "its", " ", "state", " ", "eqiv", " ", "to", 
+            " ", "\"\<STOP\>\""}], " ", "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"And", "@@@", 
+           RowBox[{"Thread", "[", 
+            RowBox[{"{", "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"retrun", " ", "list", " ", "of", " ", "driver"}], 
+                "-", 
+                RowBox[{"listening", " ", "control", " ", "points"}], " ", 
+                "-", " ", 
+                RowBox[{"are", " ", "in", " ", 
+                 RowBox[{"range", "?", " ", "T"}]}]}], "|", "F"}], " ", 
+              "*)"}], "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"inPolyQ", "[", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"fov", "[", "\[IndentingNewLine]", 
+                   RowBox[{
+                   "currentDriverPosition", ",", "\[IndentingNewLine]", 
+                    "currentDriverAngle"}], "\[IndentingNewLine]", "]"}], ",",
+                   "\[IndentingNewLine]", "#"}], "\[IndentingNewLine]", "]"}],
+                 "&"}], "/@", 
+               RowBox[{"Extract", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                "controlPointLocations", ",", "\[IndentingNewLine]", 
+                 "currentDriverControlIndex"}], "\[IndentingNewLine]", 
+                "]"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"(*", " ", 
+               RowBox[{
+                RowBox[{"extract", " ", "state", " ", "of", " ", "driver"}], 
+                "-", 
+                RowBox[{"listening", " ", "control", " ", "points"}], " ", 
+                "-", " ", 
+                RowBox[{"True", " ", "if", " ", "\"\<STOP\>\""}]}], "*)"}], 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"Extract", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                "allControlStates", ",", "\[IndentingNewLine]", 
+                 "currentDriverControlIndex"}], "\[IndentingNewLine]", "]"}], 
+               "/.", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"\"\<STOP\>\"", "\[Rule]", "True"}], ",", 
+                 RowBox[{"\"\<GO\>\"", "\[Rule]", "False"}]}], "}"}]}]}], 
+             "\[IndentingNewLine]", "}"}], "]"}]}], "\[IndentingNewLine]", 
+          "]"}], "\[IndentingNewLine]", "]"}], ">", "0"}]}], 
+      "\[IndentingNewLine]", "]"}]}], ";"}], "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"stopControlInRangeQ", "=", 
+    RowBox[{"Compile", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"currentDriverPosition", ",", "_Real", ",", "1"}], "}"}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"currentDriverAngle", ",", "_Real", ",", "0"}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"controlPointLocations", ",", "_Real", ",", "2"}], "}"}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"currentDriverControlIndex", ",", "_Real", ",", "2"}], "}"}],
+         ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"allControlStates", ",", "_Real", ",", "1"}], "}"}]}], 
+       "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "returns", " ", "TRUE", " ", "if", " ", "exists", " ", "any", " ", 
+        "instance", " ", "of", " ", "control", " ", "point", " ", "in", " ", 
+        "range", " ", "and", " ", "set", " ", "to", " ", "\"\<STOP\>\""}], 
+       " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Total", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+              "#", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+              "\[Equal]", "1"}], "&&", 
+             RowBox[{
+              RowBox[{
+              "#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
+              "\[Equal]", "1"}]}], ",", "1", ",", "0"}], "]"}], "&"}], "/@", 
+         RowBox[{"Thread", "[", 
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"inPolyQ", "[", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"fov", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    "currentDriverPosition", ",", "\[IndentingNewLine]", 
+                    "currentDriverAngle"}], "\[IndentingNewLine]", "]"}], ",",
+                     "\[IndentingNewLine]", "#"}], "\[IndentingNewLine]", 
+                   "]"}], "&"}], "/@", 
+                 RowBox[{"Extract", "[", "\[IndentingNewLine]", 
+                  RowBox[{
+                  "controlPointLocations", ",", "\[IndentingNewLine]", 
+                   "currentDriverControlIndex"}], "\[IndentingNewLine]", 
+                  "]"}]}], ")"}], "\[LeftDoubleBracket]", "1", 
+               "\[RightDoubleBracket]"}], ",", "1", ",", "0"}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"Extract", "[", "\[IndentingNewLine]", 
+             RowBox[{
+             "allControlStates", ",", "\[IndentingNewLine]", 
+              "currentDriverControlIndex"}], "\[IndentingNewLine]", "]"}]}], 
+           "\[IndentingNewLine]", "}"}], "]"}]}], "\[IndentingNewLine]", 
+        "]"}], ">", "0"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"CompilationTarget", "\[Rule]", "\"\<C\>\""}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"getControlPointLocation", "=", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+       "currentDriverPosition", ",", "\[IndentingNewLine]", 
+        "currentDriverAngle", ",", "\[IndentingNewLine]", 
+        "controlPointLocations", ",", "\[IndentingNewLine]", 
+        "currentDriverControlIndex", ",", "\[IndentingNewLine]", 
+        "allControlStates"}], "\[IndentingNewLine]", "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{"activeControlPoint", "=", 
+          RowBox[{"Extract", "[", "\[IndentingNewLine]", 
+           RowBox[{
+           "controlPointLocations", ",", "\[IndentingNewLine]", 
+            "currentDriverControlIndex"}], "\[IndentingNewLine]", "]"}]}], 
+         "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Flatten", "[", "\[IndentingNewLine]", 
+         RowBox[{"Extract", "[", "\[IndentingNewLine]", 
+          RowBox[{"activeControlPoint", ",", "\[IndentingNewLine]", 
+           RowBox[{"Position", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"inPolyQ", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"fov", "[", "\[IndentingNewLine]", 
+                  RowBox[{
+                  "currentDriverPosition", ",", "\[IndentingNewLine]", 
+                   "currentDriverAngle"}], "\[IndentingNewLine]", "]"}], ",", 
+                 "\[IndentingNewLine]", "#"}], "\[IndentingNewLine]", "]"}], 
+               "&"}], "/@", "activeControlPoint"}], ",", "True"}], "]"}]}], 
+          "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}]}], 
+       "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"IDM", "=", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{"acceleration", " ", "between", " ", "drivers"}], " ", "*)"}],
+        "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{"active", " ", "driver", " ", "ID"}], " ", "*)"}], 
+       RowBox[{"ID", ",", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{"active", " ", "driver", " ", "current", " ", "rotation"}], 
+         " ", "*)"}], "currentDriverAngle", ",", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "current", " ", "positions", " ", "of", " ", "all", " ", "drivers"}],
+          " ", "*)"}], "allDriverCurrentPosition", ",", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "current", " ", "speeds", " ", "of", " ", "all", " ", "drivers"}], 
+         " ", "*)"}], " ", "allDriverCurrentSpeeds", ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{"attributes", " ", "of", " ", "active", " ", "driver"}], " ",
+          "*)"}], " ", "driverParamaters", ",", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{"acceleration", " ", "between", " ", "enviroment"}], " ", 
+         "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "positions", " ", "of", " ", "all", " ", "control", " ", "points"}], 
+         " ", "*)"}], " ", "allControlPointLocations", ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+          RowBox[{"active", " ", "driver", " ", "listen"}], "-", 
+          RowBox[{"to", " ", "control", " ", "point", " ", "index"}]}], " ", 
+         "*)"}], " ", "currentDriverControlIndex", ",", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "current", " ", "state", " ", "of", " ", "all", " ", "control", " ", 
+          "points"}], "*)"}], " ", "allControlStates"}], 
+       "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"id", "=", 
+           RowBox[{"getLeadingDriverID", "[", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "active", " ", "drivers", " ", "current", " ", "position"}], " ",
+              "*)"}], " ", 
+            RowBox[{
+             RowBox[{
+             "allDriverCurrentPosition", "\[LeftDoubleBracket]", "ID", 
+              "\[RightDoubleBracket]"}], ",", 
+             RowBox[{"(*", " ", 
+              RowBox[{
+              "active", " ", "drivers", " ", "current", " ", "angle"}], " ", 
+              "*)"}], "currentDriverAngle", ",", "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{
+              "current", " ", "positions", " ", "of", " ", "all", " ", 
+               "drivers"}], " ", "*)"}], " ", "allDriverCurrentPosition"}], 
+            "\[IndentingNewLine]", "]"}]}], ",", "\[IndentingNewLine]", 
+          "\[IndentingNewLine]", 
+          RowBox[{"inRangeControlQ", "=", 
+           RowBox[{"stopControlInRangeQ", "[", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "active", " ", "drivers", " ", "current", " ", "position"}], " ",
+              "*)"}], " ", 
+            RowBox[{
+             RowBox[{
+             "allDriverCurrentPosition", "\[LeftDoubleBracket]", "ID", 
+              "\[RightDoubleBracket]"}], ",", 
+             RowBox[{"(*", " ", 
+              RowBox[{
+              "active", " ", "drivers", " ", "current", " ", "angle"}], " ", 
+              "*)"}], "currentDriverAngle", ",", "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{
+              "positions", " ", "of", " ", "all", " ", "control", " ", 
+               "points"}], " ", "*)"}], " ", "allControlPointLocations", ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{
+               RowBox[{"active", " ", "driver", " ", "listen"}], "-", 
+               RowBox[{"to", " ", "control", " ", "point", " ", "index"}]}], 
+              " ", "*)"}], " ", "currentDriverControlIndex", ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{
+              "current", " ", "state", " ", "of", " ", "all", " ", "control", 
+               " ", "points"}], "*)"}], " ", "allControlStates"}], 
+            "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"inRangeControlQ", "\[Equal]", "False"}], ",", 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+           "if", " ", "not", " ", "in", " ", "range", " ", "of", " ", "stop", 
+            " ", "signal"}], " ", "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"computeAcellerationDrivers", "[", "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{"nearest", " ", "driver", " ", "ID", " ", 
+             RowBox[{"(", 
+              RowBox[{"0", " ", "if", " ", "leading"}], ")"}]}], " ", "*)"}], 
+           RowBox[{"id", ",", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "active", " ", "driver", " ", "current", " ", "positiona"}], " ",
+              "*)"}], " ", 
+            RowBox[{
+            "allDriverCurrentPosition", "\[LeftDoubleBracket]", "ID", 
+             "\[RightDoubleBracket]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{"active", " ", "driver", " ", "current", " ", "speed"}], 
+             " ", "*)"}], " ", 
+            RowBox[{
+            "allDriverCurrentSpeeds", "\[LeftDoubleBracket]", "ID", 
+             "\[RightDoubleBracket]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{"active", " ", "drivers", " ", "current", " ", "angle"}],
+              " ", "*)"}], " ", "currentDriverAngle", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "current", " ", "position", " ", "of", " ", "all", " ", 
+              "drivers"}], " ", "*)"}], " ", "allDriverCurrentPosition", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "current", " ", "speeds", " ", "of", " ", "all", " ", 
+              "drivers"}], " ", "*)"}], " ", "allDriverCurrentSpeeds", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{"active", " ", "driver", " ", "attributes"}], " ", 
+             "*)"}], " ", "driverParamaters", ",", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "is", " ", "active", " ", "driver", " ", "leading", " ", "or", 
+              " ", 
+              RowBox[{"following", "?"}]}], " ", "*)"}], 
+            RowBox[{"id", "\[NotEqual]", "0"}]}], "\[IndentingNewLine]", 
+           "]"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+           "if", " ", "driver", " ", "is", " ", "in", " ", "range", " ", "of",
+             " ", "stop", " ", 
+            RowBox[{"signal", ":"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+           "get", " ", "location", " ", "of", " ", "stop", " ", "signal"}], 
+           " ", "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"With", "[", 
+           RowBox[{
+            RowBox[{"{", "\[IndentingNewLine]", 
+             RowBox[{"controlPointLocation", "=", 
+              RowBox[{"getControlPointLocation", "[", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                "allDriverCurrentPosition", "\[LeftDoubleBracket]", "ID", 
+                 "\[RightDoubleBracket]"}], ",", "\[IndentingNewLine]", 
+                "currentDriverAngle", ",", "\[IndentingNewLine]", 
+                "allControlPointLocations", ",", "\[IndentingNewLine]", 
+                "currentDriverControlIndex", ",", "\[IndentingNewLine]", 
+                "allControlStates"}], "\[IndentingNewLine]", "]"}]}], 
+             "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"Which", "[", "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{
+              "case", " ", "of", " ", "driver", " ", "leading", " ", "and", 
+               " ", "is", " ", "in", " ", "range", " ", "of", " ", "stop", 
+               " ", "signal"}], " ", "*)"}], "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"id", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+              RowBox[{"(*", " ", 
+               RowBox[{
+               "compute", " ", "acceleration", " ", "towards", " ", "stop", 
+                " ", "signal"}], " ", "*)"}], "\[IndentingNewLine]", 
+              RowBox[{
+              "computeAcellerationControls", "[", "\[IndentingNewLine]", 
+               RowBox[{"(*", " ", 
+                RowBox[{
+                "active", " ", "driver", " ", "current", " ", "positiona"}], 
+                " ", "*)"}], " ", 
+               RowBox[{
+                RowBox[{
+                "allDriverCurrentPosition", "\[LeftDoubleBracket]", "ID", 
+                 "\[RightDoubleBracket]"}], ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "active", " ", "driver", " ", "current", " ", "speed"}], " ",
+                  "*)"}], " ", 
+                RowBox[{
+                "allDriverCurrentSpeeds", "\[LeftDoubleBracket]", "ID", 
+                 "\[RightDoubleBracket]"}], ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "active", " ", "drivers", " ", "current", " ", "angle"}], 
+                 " ", "*)"}], " ", "currentDriverAngle", ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{"active", " ", "driver", " ", "attributes"}], " ", 
+                 "*)"}], " ", "driverParamaters", ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "location", " ", "of", " ", "control", " ", "point"}], " ", 
+                 "*)"}], "controlPointLocation"}], "]"}], ",", 
+              "\[IndentingNewLine]", "\[IndentingNewLine]", 
+              RowBox[{"(*", " ", 
+               RowBox[{
+               "in", " ", "range", " ", "of", " ", "stop", " ", "signal", " ",
+                 "but", " ", "driver", " ", "is", " ", "following", " ", 
+                "and", " ", "lead", " ", "vehichle", " ", "is", " ", 
+                "closer"}], " ", "*)"}], "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"EuclideanDistance", "[", 
+                RowBox[{
+                 RowBox[{
+                 "allDriverCurrentPosition", "\[LeftDoubleBracket]", "ID", 
+                  "\[RightDoubleBracket]"}], ",", 
+                 RowBox[{
+                 "allDriverCurrentPosition", "\[LeftDoubleBracket]", "id", 
+                  "\[RightDoubleBracket]"}]}], "]"}], "<", 
+               RowBox[{"EuclideanDistance", "[", 
+                RowBox[{
+                 RowBox[{
+                 "allDriverCurrentPosition", "\[LeftDoubleBracket]", "ID", 
+                  "\[RightDoubleBracket]"}], ",", "controlPointLocation"}], 
+                "]"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"(*", " ", 
+               RowBox[{
+               "compute", " ", "acceleration", " ", "towards", " ", "lead", 
+                " ", "vehicle"}], " ", "*)"}], "\[IndentingNewLine]", 
+              RowBox[{
+              "computeAcellerationDrivers", "[", "\[IndentingNewLine]", 
+               RowBox[{"(*", " ", 
+                RowBox[{"nearest", " ", "driver", " ", "ID", " ", 
+                 RowBox[{"(", 
+                  RowBox[{"0", " ", "if", " ", "leading"}], ")"}]}], " ", 
+                "*)"}], 
+               RowBox[{"id", ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "active", " ", "driver", " ", "current", " ", "positiona"}], 
+                 " ", "*)"}], " ", 
+                RowBox[{
+                "allDriverCurrentPosition", "\[LeftDoubleBracket]", "ID", 
+                 "\[RightDoubleBracket]"}], ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "active", " ", "driver", " ", "current", " ", "speed"}], " ",
+                  "*)"}], " ", 
+                RowBox[{
+                "allDriverCurrentSpeeds", "\[LeftDoubleBracket]", "ID", 
+                 "\[RightDoubleBracket]"}], ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "active", " ", "drivers", " ", "current", " ", "angle"}], 
+                 " ", "*)"}], " ", "currentDriverAngle", ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "current", " ", "position", " ", "of", " ", "all", " ", 
+                  "drivers"}], " ", "*)"}], " ", "allDriverCurrentPosition", 
+                ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "current", " ", "speeds", " ", "of", " ", "all", " ", 
+                  "drivers"}], " ", "*)"}], " ", "allDriverCurrentSpeeds", 
+                ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{"active", " ", "driver", " ", "attributes"}], " ", 
+                 "*)"}], " ", "driverParamaters", ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "is", " ", "active", " ", "driver", " ", "leading", " ", 
+                  "or", " ", 
+                  RowBox[{"following", "?"}]}], " ", "*)"}], 
+                RowBox[{"id", "\[NotEqual]", "0"}]}], "\[IndentingNewLine]", 
+               "]"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+              RowBox[{"(*", " ", 
+               RowBox[{
+                RowBox[{
+                "in", " ", "range", " ", "of", " ", "stop", " ", "signal", 
+                 " ", "but", " ", "driver", " ", "is", " ", "following"}], 
+                ",", " ", 
+                RowBox[{"signal", " ", "is", " ", "closer"}]}], " ", "*)"}], 
+              " ", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"EuclideanDistance", "[", 
+                RowBox[{
+                 RowBox[{
+                 "allDriverCurrentPosition", "\[LeftDoubleBracket]", "ID", 
+                  "\[RightDoubleBracket]"}], ",", 
+                 RowBox[{
+                 "allDriverCurrentPosition", "\[LeftDoubleBracket]", "id", 
+                  "\[RightDoubleBracket]"}]}], "]"}], "\[GreaterEqual]", 
+               RowBox[{"EuclideanDistance", "[", 
+                RowBox[{
+                 RowBox[{
+                 "allDriverCurrentPosition", "\[LeftDoubleBracket]", "ID", 
+                  "\[RightDoubleBracket]"}], ",", "controlPointLocation"}], 
+                "]"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"(*", " ", 
+               RowBox[{
+               "compute", " ", "acceleration", " ", "towards", " ", "stop", 
+                " ", "signal"}], " ", "*)"}], "\[IndentingNewLine]", 
+              RowBox[{
+              "computeAcellerationControls", "[", "\[IndentingNewLine]", 
+               RowBox[{"(*", " ", 
+                RowBox[{
+                "active", " ", "driver", " ", "current", " ", "positiona"}], 
+                " ", "*)"}], " ", 
+               RowBox[{
+                RowBox[{
+                "allDriverCurrentPosition", "\[LeftDoubleBracket]", "ID", 
+                 "\[RightDoubleBracket]"}], ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "active", " ", "driver", " ", "current", " ", "speed"}], " ",
+                  "*)"}], " ", 
+                RowBox[{
+                "allDriverCurrentSpeeds", "\[LeftDoubleBracket]", "ID", 
+                 "\[RightDoubleBracket]"}], ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "active", " ", "drivers", " ", "current", " ", "angle"}], 
+                 " ", "*)"}], " ", "currentDriverAngle", ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{"active", " ", "driver", " ", "attributes"}], " ", 
+                 "*)"}], " ", "driverParamaters", ",", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "location", " ", "of", " ", "control", " ", "point"}], " ", 
+                 "*)"}], "controlPointLocation"}], "]"}]}], 
+             "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+         "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"junction", " ", "control"}], " ", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"junctionData", "=", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", "return", "}"}], ",", 
+      RowBox[{"junctionMarketStreet", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0"}], "}"}], ",", "0", ",", "return"}], "]"}]}], 
+     "]"}]}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fList", "=", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"a", "&&", 
+       RowBox[{"!", "f"}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{"b", "&&", 
+       RowBox[{"!", "c"}], "&&", 
+       RowBox[{"!", "d"}], "&&", 
+       RowBox[{"!", "f"}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"!", "b"}], "&&", "c", "&&", 
+       RowBox[{"!", "e"}], "&&", 
+       RowBox[{"!", "f"}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"!", "b"}], "&&", "d"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"!", "c"}], "&&", "e"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"!", "a"}], "&&", 
+       RowBox[{"!", "b"}], "&&", 
+       RowBox[{"!", "c"}], "&&", "f"}]}], "\[IndentingNewLine]", "}"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"controlFunction", "=", 
+    RowBox[{"AssociationThread", "[", 
+     RowBox[{
+      RowBox[{"Range", "[", 
+       RowBox[{"Length", "[", "fList", "]"}], "]"}], "\[Rule]", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"BooleanFunction", "[", 
+          RowBox[{"BooleanTable", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"a", ",", "b", ",", "c", ",", "d", ",", "e", ",", "f"}],
+               "}"}], "\[Rule]", " ", 
+             RowBox[{
+             "fList", "\[LeftDoubleBracket]", "#", 
+              "\[RightDoubleBracket]"}]}], ",", 
+            RowBox[{"{", 
+             RowBox[{"a", ",", "b", ",", "c", ",", "d", ",", "e", ",", "f"}], 
+             "}"}]}], "]"}], "]"}], "&"}], "/@", 
+        RowBox[{"Range", "[", 
+         RowBox[{"Length", "[", "fList", "]"}], "]"}]}], ")"}]}], "]"}]}], 
+   ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"initilizises", " ", "list", " ", "of", " ", "states", " ", 
+    RowBox[{"(", 
+     RowBox[{"STOP", " ", "or", " ", "GO"}], ")"}], " ", "for", " ", "all", 
+    " ", "control", " ", "points"}], "*)"}], 
+  RowBox[{
+   RowBox[{"initilizeControlIndicatorStates", ":=", 
+    RowBox[{"controlIndicatorState", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"controlFunction", "[", "#", "]"}], "@@", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"ConstantArray", "[", 
+              RowBox[{"\"\<GO\>\"", ",", 
+               RowBox[{"Length", "[", 
+                RowBox[{"junctionData", "[", "\"\<pathPoints\>\"", "]"}], 
+                "]"}]}], "]"}], "/.", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"\"\<STOP\>\"", "\[Rule]", " ", "0"}], ",", 
+               RowBox[{"\"\<GO\>\"", "\[Rule]", "1"}]}], "}"}]}], ")"}]}], 
+          ")"}], "&"}], "/@", 
+        RowBox[{"Range", "[", 
+         RowBox[{"Length", "[", "fList", "]"}], "]"}]}], ")"}], "/.", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"False", "\[Rule]", "\"\<STOP\>\""}], ",", 
+        RowBox[{"True", "\[Rule]", "\"\<GO\>\""}]}], "}"}]}]}]}], 
+   ";"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"initilizeControlIndicatorStates", ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "updates", " ", "control", " ", "states", " ", "with", " ", "control", " ",
+     "function"}], " ", "*)"}], 
+  RowBox[{
+   RowBox[{"updateControlIndicatorStates", ":=", 
+    RowBox[{"controlIndicatorState", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"controlFunction", "[", "#", "]"}], "@@", 
+           RowBox[{"(", 
+            RowBox[{"controlIndicatorState", "/.", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"\"\<STOP\>\"", "\[Rule]", " ", "0"}], ",", 
+               RowBox[{"\"\<GO\>\"", "\[Rule]", "1"}]}], "}"}]}], ")"}]}], 
+          ")"}], "&"}], "/@", 
+        RowBox[{"Range", "[", 
+         RowBox[{"Length", "[", "fList", "]"}], "]"}]}], ")"}], "/.", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"False", "\[Rule]", "\"\<STOP\>\""}], ",", 
+        RowBox[{"True", "\[Rule]", "\"\<GO\>\""}]}], "}"}]}]}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"toggles", " ", 
+    RowBox[{"START", "/", "STOP"}], " ", "ID", " ", "indicator", " ", "state",
+     " ", "and", " ", "updates", " ", "system", " ", "with", " ", "new", " ", 
+    "value"}], " ", "*)"}], " "}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"toggleIndicatorState", "=", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", "ID", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{"toggleTo", "=", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+             "controlIndicatorState", "\[LeftDoubleBracket]", "ID", 
+              "\[RightDoubleBracket]"}], "\[Equal]", "\"\<GO\>\""}], ",", 
+            "\"\<STOP\>\"", ",", "\"\<GO\>\""}], "]"}]}], 
+         "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Do", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+            "controlIndicatorState", "\[LeftDoubleBracket]", "ID", 
+             "\[RightDoubleBracket]"}], "=", "toggleTo"}], ";", 
+           "\[IndentingNewLine]", "updateControlIndicatorStates"}], ",", 
+          "\[IndentingNewLine]", "2"}], "]"}]}], "\[IndentingNewLine]", 
+       "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"**", " ", "Driver"}], " ", "insertion"}], " ", "***)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "location", " ", "and", " ", "starting", " ", "angles", " ", "for", " ", 
+    "all", " ", "starting", " ", "points", " ", "on", " ", "map"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"insertionPoints", "=", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"First", "/@", 
+        RowBox[{"junctionData", "[", "\"\<pathPoints\>\"", "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"ArcTan", "@@", 
+           RowBox[{"Flatten", "[", 
+            RowBox[{"Differences", "/@", 
+             RowBox[{"Transpose", "[", "#", "]"}]}], "]"}]}], ")"}], "&"}], "/@", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "\[LeftDoubleBracket]", 
+            RowBox[{"1", ";;", "2"}], "\[RightDoubleBracket]"}], "&"}], "/@", 
+          RowBox[{"junctionData", "[", "\"\<pathPoints\>\"", "]"}]}], 
+         ")"}]}]}], "\[IndentingNewLine]", "}"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"journeyPaths", "=", 
+    RowBox[{"junctionData", "[", "\"\<pathPoints\>\"", "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"insertion", " ", "check", " ", "region"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"inserionPointCheckRegion", "=", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", "ID", "}"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{"Delete", "[", 
+        RowBox[{
+         RowBox[{"Last", "[", 
+          RowBox[{"highlightPath", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"AngleVector", "[", 
+              RowBox[{
+               RowBox[{"insertionPoints", "\[LeftDoubleBracket]", 
+                RowBox[{"ID", ",", "1"}], "\[RightDoubleBracket]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "1"}], ",", 
+                 RowBox[{"insertionPoints", "\[LeftDoubleBracket]", 
+                  RowBox[{"ID", ",", "2"}], "\[RightDoubleBracket]"}]}], 
+                "}"}]}], "]"}], ",", 
+             RowBox[{"AngleVector", "[", 
+              RowBox[{
+               RowBox[{"insertionPoints", "\[LeftDoubleBracket]", 
+                RowBox[{"ID", ",", "1"}], "\[RightDoubleBracket]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"4", ",", 
+                 RowBox[{"insertionPoints", "\[LeftDoubleBracket]", 
+                  RowBox[{"ID", ",", "2"}], "\[RightDoubleBracket]"}]}], 
+                "}"}]}], "]"}]}], "}"}], "]"}], "]"}], ",", "0"}], "]"}], 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"CirclePoints", "[", 
+       RowBox[{
+        RowBox[{"insertionPoints", "\[LeftDoubleBracket]", 
+         RowBox[{"ID", ",", "1"}], "\[RightDoubleBracket]"}], ",", "5", ",", 
+        "10"}], "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "returns", " ", "True", " ", "if", " ", "inserion", " ", "area", " ", "is",
+     " ", "clear", " ", "of", " ", "vehicles"}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"insertionPointClearQ", "=", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", "insertionPointID", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "check", " ", "if", " ", "there", " ", "are", " ", "already", " ", 
+         "drivers", " ", "in", " ", "simulation"}], " ", "*)"}], 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Length", "[", "driverData", "]"}], ">", "0"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+          RowBox[{"if", " ", "so"}], ",", " ", 
+          RowBox[{"check", " ", "specific", " ", "region"}]}], " ", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"Not", "[", 
+         RowBox[{"MemberQ", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"inPolyQ", "[", 
+              RowBox[{
+               RowBox[{
+               "inserionPointCheckRegion", "[", "insertionPointID", "]"}], 
+               ",", "#"}], "]"}], "&"}], "/@", 
+            RowBox[{"Values", "[", 
+             RowBox[{"driverData", "\[LeftDoubleBracket]", 
+              RowBox[{"All", ",", "\"\<position\>\""}], 
+              "\[RightDoubleBracket]"}], "]"}]}], ",", "True"}], "]"}], "]"}],
+         ",", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+          RowBox[{"if", " ", "no", " ", "drivers", " ", "presnet"}], ",", " ", 
+          RowBox[{"then", " ", "return", " ", "TRUE"}]}], " ", "*)"}], 
+        "\[IndentingNewLine]", "True"}], "\[IndentingNewLine]", "]"}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"add", " ", "driver", " ", "into", " ", "agent", " ", "pool"}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"addDriver", "=", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"insertionPointID", ",", "speed", ",", "attrib"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"driverData", ",", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Length", "[", "driverData", "]"}], "\[Equal]", "0"}], 
+           ",", "1", ",", 
+           RowBox[{
+            RowBox[{"Last", "[", 
+             RowBox[{"Keys", "[", "driverData", "]"}], "]"}], "+", "1"}]}], 
+          "]"}], "*)"}], 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "driverData", "]"}], "+", "1"}], "\[Rule]", 
+         RowBox[{"<|", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"\"\<position\>\"", "\[Rule]", 
+            RowBox[{"insertionPoints", "\[LeftDoubleBracket]", 
+             RowBox[{"insertionPointID", ",", "1"}], 
+             "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"\"\<rotation\>\"", "\[Rule]", 
+            RowBox[{"insertionPoints", "\[LeftDoubleBracket]", 
+             RowBox[{"insertionPointID", ",", "2"}], 
+             "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"\"\<speed\>\"", "\[Rule]", "speed"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"\"\<attributes\>\"", "\[Rule]", "attrib"}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"\"\<path\>\"", "\[Rule]", 
+            RowBox[{
+            "journeyPaths", "\[LeftDoubleBracket]", "insertionPointID", 
+             "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"\"\<exitRegion\>\"", "\[Rule]", 
+            RowBox[{"exitPointCheckRegion", "[", "insertionPointID", "]"}]}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{"\"\<controlIndex\>\"", "\[Rule]", 
+            RowBox[{"Position", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"inPolyQ", "[", 
+                 RowBox[{
+                  RowBox[{"Delete", "[", 
+                   RowBox[{
+                    RowBox[{"Last", "[", 
+                    RowBox[{"highlightPath", "[", 
+                    RowBox[{
+                    "journeyPaths", "\[LeftDoubleBracket]", 
+                    "insertionPointID", "\[RightDoubleBracket]"}], "]"}], 
+                    "]"}], ",", "0"}], "]"}], ",", "#"}], "]"}], "&"}], "/@", 
+               RowBox[{"junctionData", "[", "\"\<controlPoints\>\"", "]"}]}], 
+              ",", "\[IndentingNewLine]", "True"}], "]"}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"\"\<color\>\"", "->", 
+            RowBox[{"RandomColor", "[", "]"}]}]}], "\[IndentingNewLine]", 
+          "|>"}]}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+     "]"}]}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"insertDriver", "=", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", "insertionPointID", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "insert", " ", "driver", " ", "at", " ", "location", " ", "if", " ", 
+          "conditions", " ", "all", " ", "true"}], " ", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{"insertion", " ", "point", " ", "is", " ", "clear"}], " ", 
+         "*)"}], "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"insertionPointClearQ", "[", "insertionPointID", "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{"then", " ", "add", " ", "driver"}], " ", "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{"addDriver", "[", 
+          RowBox[{"insertionPointID", ",", 
+           RowBox[{"(*", " ", "vInt", " ", "*)"}], "0.5", ",", 
+           RowBox[{"(*", " ", "attributes", " ", "*)"}], 
+           RowBox[{"{", 
+            RowBox[{"(*", "aNorm", "*)"}], 
+            RowBox[{"0.1", ",", 
+             RowBox[{"(*", "vLim", "*)"}], "0.5", ",", 
+             RowBox[{"(*", " ", 
+              RowBox[{"stop", " ", "gap"}], " ", "*)"}], "1", ",", 
+             RowBox[{"(*", " ", "breaking", " ", "*)"}], "0.5", ",", 
+             RowBox[{"(*", " ", 
+              RowBox[{"time", " ", "gap"}], " ", "*)"}], "1.5"}], "}"}]}], 
+          "]"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"**", " ", "Driver"}], " ", "Removal"}], " ", "****)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"locations", " ", "of", " ", "exit", " ", "points"}], " ", "-", 
+    " ", 
+    RowBox[{"use", " ", "to", " ", "make", " ", "regions"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"exitPoints", "=", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Last", "/@", 
+        RowBox[{"junctionData", "[", "\"\<pathPoints\>\"", "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"ArcTan", "@@", 
+           RowBox[{"Flatten", "[", 
+            RowBox[{"Differences", "/@", 
+             RowBox[{"Transpose", "[", "#", "]"}]}], "]"}]}], ")"}], "&"}], "/@", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "\[LeftDoubleBracket]", 
+            RowBox[{
+             RowBox[{"-", "2"}], ";;", 
+             RowBox[{"-", "1"}]}], "\[RightDoubleBracket]"}], "&"}], "/@", 
+          RowBox[{"junctionData", "[", "\"\<pathPoints\>\"", "]"}]}], 
+         ")"}]}]}], "\[IndentingNewLine]", "}"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"regions", " ", "for", " ", "removal", " ", "of", " ", "drivers"}],
+    " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"exitPointCheckRegion", "=", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", "ID", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"Last", "[", "\[IndentingNewLine]", 
+        RowBox[{"highlightPath", "[", "\[IndentingNewLine]", 
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"exitPoints", "\[LeftDoubleBracket]", 
+            RowBox[{"ID", ",", "1"}], "\[RightDoubleBracket]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AngleVector", "[", 
+            RowBox[{
+             RowBox[{"exitPoints", "\[LeftDoubleBracket]", 
+              RowBox[{"ID", ",", 
+               RowBox[{"(*", "pts", "*)"}], "1"}], "\[RightDoubleBracket]"}], 
+             ",", 
+             RowBox[{"{", 
+              RowBox[{"4", ",", 
+               RowBox[{
+                RowBox[{"exitPoints", "\[LeftDoubleBracket]", 
+                 RowBox[{"ID", ",", 
+                  RowBox[{"(*", "angle", "*)"}], "2"}], 
+                 "\[RightDoubleBracket]"}], "-", "\[Pi]"}]}], "}"}]}], 
+            "]"}]}], "\[IndentingNewLine]", "}"}], "\[IndentingNewLine]", 
+         "]"}], "\[IndentingNewLine]", "]"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"CirclePoints", "[", 
+       RowBox[{
+        RowBox[{"exitPoints", "\[LeftDoubleBracket]", 
+         RowBox[{"1", ",", "1"}], "\[RightDoubleBracket]"}], ",", "3", ",", 
+        "10"}], "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", "**", "*****)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"controlStatePreset", "=", 
+   RowBox[{"Function", "[", 
+    RowBox[{
+     RowBox[{"{", "ID", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{"presetControlStates", "=", 
+         RowBox[{"<|", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"1", "->", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<GO\>\"", ",", "\"\<GO\>\"", ",", "\"\<STOP\>\"", ",", 
+              "\"\<STOP\>\"", ",", "\"\<GO\>\"", ",", "\"\<STOP\>\""}], 
+             "}"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"2", "->", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<GO\>\"", ",", "\"\<STOP\>\"", ",", "\"\<GO\>\"", ",", 
+              "\"\<GO\>\"", ",", "\"\<STOP\>\"", ",", "\"\<STOP\>\""}], 
+             "}"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"3", "->", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<STOP\>\"", ",", "\"\<STOP\>\"", ",", "\"\<STOP\>\"", ",", 
+              "\"\<GO\>\"", ",", "\"\<GO\>\"", ",", "\"\<GO\>\""}], "}"}]}]}],
+           "\[IndentingNewLine]", "|>"}]}], "\[IndentingNewLine]", "}"}], ",",
+        "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"controlIndicatorState", "=", 
+         RowBox[{"presetControlStates", "[", "ID", "]"}]}], ";", 
+        "\[IndentingNewLine]", "updateControlIndicatorStates"}]}], 
+      "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.6818170580421114`*^9, 3.6818171177645197`*^9}, {
+   3.6818171485930405`*^9, 3.6818171611998167`*^9}, {3.6818171932962084`*^9, 
+   3.681817249912258*^9}, 3.6818173067094026`*^9, {3.6818173438606915`*^9, 
+   3.681817358375415*^9}, {3.681818487188542*^9, 3.681818497680765*^9}, {
+   3.6818194166008563`*^9, 3.681819417803108*^9}, {3.681819686040489*^9, 
+   3.681819720819827*^9}, {3.6818197546854095`*^9, 3.6818198041554275`*^9}, {
+   3.6818208506059885`*^9, 3.681820885496925*^9}, {3.681820922902894*^9, 
+   3.6818209697813034`*^9}, {3.6818210020061088`*^9, 3.681821182632391*^9}, {
+   3.681821224978344*^9, 3.6818212539205914`*^9}, {3.681821903339536*^9, 
+   3.681821963037263*^9}, {3.681822032267269*^9, 3.681822034438754*^9}, {
+   3.6818223934400673`*^9, 3.6818224572704554`*^9}, {3.6818226171509953`*^9, 
+   3.6818226233678293`*^9}, {3.681900066770897*^9, 3.681900080009857*^9}, {
+   3.681900315117345*^9, 3.681900356841802*^9}, {3.6819006649343224`*^9, 
+   3.6819006661050224`*^9}, {3.6819008260743527`*^9, 3.681900827948812*^9}, {
+   3.6819051137660036`*^9, 3.6819051143166428`*^9}, {3.6819059377076497`*^9, 
+   3.6819059772051287`*^9}, {3.6819068288075247`*^9, 3.681906868894849*^9}, {
+   3.681907458454815*^9, 3.6819074622912087`*^9}, {3.681907677675702*^9, 
+   3.6819076810912237`*^9}, {3.6820623175745096`*^9, 3.682062320981446*^9}, {
+   3.682063269819296*^9, 3.6820633110858345`*^9}, 3.6820915445823956`*^9, {
+   3.6821510961934175`*^9, 3.6821511326114645`*^9}, {3.682151218808568*^9, 
+   3.6821512540725346`*^9}, {3.682161768477248*^9, 3.6821617999386826`*^9}, {
+   3.682161869778388*^9, 3.682161870318473*^9}, 3.682166522354867*^9, {
+   3.6821667921222525`*^9, 3.682166799870963*^9}, 3.682167329814119*^9, {
+   3.6821753917085266`*^9, 3.682175399106781*^9}, {3.6821763054091525`*^9, 
+   3.6821763180818634`*^9}, {3.6821766422917004`*^9, 3.682176645794877*^9}, {
+   3.682177743875595*^9, 3.6821777475499887`*^9}, 3.6822477183848553`*^9, 
+   3.682249453740942*^9, {3.6822499629952087`*^9, 3.6822499675919495`*^9}, {
+   3.682261463040514*^9, 3.6822615040203886`*^9}, {3.6822615506384068`*^9, 
+   3.682261563302803*^9}, {3.6822618034177074`*^9, 3.682261806652031*^9}, {
+   3.6822674921349335`*^9, 3.6822674923252754`*^9}, {3.6824353309801245`*^9, 
+   3.6824353344631796`*^9}, {3.682436077592166*^9, 3.6824360936813445`*^9}, {
+   3.6824361660974917`*^9, 3.6824361675581493`*^9}, {3.682436963398418*^9, 
+   3.6824370418191023`*^9}, {3.6824379989436593`*^9, 
+   3.6824380046006193`*^9}, {3.6824390311652102`*^9, 
+   3.6824390312452307`*^9}, {3.682439305919958*^9, 3.682439315444121*^9}, 
+   3.6824395520171986`*^9, {3.6824396313336024`*^9, 3.6824396448334227`*^9}, {
+   3.685382188371236*^9, 3.685382189826125*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"**", 
+    RowBox[{"*", " ", "initilize", " ", "driver", " ", "data"}]}], " ", 
+   "****)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"driverData", "=", 
+     RowBox[{"<|", "|>"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"initilize", " ", "starting", " ", "positions"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"insertDriver", "/@", 
+     RowBox[{"Range", "[", 
+      RowBox[{"Length", "[", "insertionPoints", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"max", " ", "drivers"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"maxDrivers", "=", "10"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"insertDriver", "/@", 
+      RowBox[{"{", "1", "}"}]}], ";"}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"initilize", " ", "traffic", " ", "controls"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"state", " ", "list"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"controlIndicatorStateSeries", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"state", " ", "duration"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"period", "=", "1000"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"state", " ", "counter"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"stateCount", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"initilze", " ", "simulation", " ", "time"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"t", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"tMax", "=", "20"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dt", "=", "0.1"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"initilitze", " ", "simulation", " ", "output"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"for", " ", "animation"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"animationData", "=", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{"Transpose", "[", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Values", "[", 
+          RowBox[{"driverData", "\[LeftDoubleBracket]", 
+           RowBox[{"All", ",", "\"\<position\>\""}], 
+           "\[RightDoubleBracket]"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Values", "[", 
+          RowBox[{"driverData", "\[LeftDoubleBracket]", 
+           RowBox[{"All", ",", "\"\<rotation\>\""}], 
+           "\[RightDoubleBracket]"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Values", "[", 
+          RowBox[{"driverData", "\[LeftDoubleBracket]", 
+           RowBox[{"All", ",", "\"\<color\>\""}], "\[RightDoubleBracket]"}], 
+          "]"}]}], "\[IndentingNewLine]", "}"}], "]"}], "\[IndentingNewLine]",
+       "}"}]}], ";"}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.6818219728747106`*^9, 3.6818219960128746`*^9}, {
+   3.6818220407463474`*^9, 3.6818220459226427`*^9}, {3.681822494164459*^9, 
+   3.6818225082912235`*^9}, 3.681822662111902*^9, 3.6818228912029395`*^9, {
+   3.681900089591234*^9, 3.681900094868928*^9}, {3.6819003736592197`*^9, 
+   3.6819003860258846`*^9}, {3.6819004291320777`*^9, 3.681900441581644*^9}, {
+   3.681900618718013*^9, 3.6819006397256045`*^9}, {3.681900671773674*^9, 
+   3.6819007337178483`*^9}, {3.6819047171602497`*^9, 3.681904732092766*^9}, {
+   3.6819048819190288`*^9, 3.6819049201619644`*^9}, {3.6819050617012014`*^9, 
+   3.681905061811471*^9}, {3.6819051208448725`*^9, 3.681905121565415*^9}, {
+   3.6819069362652874`*^9, 3.6819069398590283`*^9}, 3.681907255654476*^9, {
+   3.6819074237168846`*^9, 3.681907425188447*^9}, 3.6819074671977034`*^9, {
+   3.681907527303576*^9, 3.681907557913747*^9}, {3.6820621581990695`*^9, 
+   3.682062187912985*^9}, {3.682062224791319*^9, 3.6820622486911383`*^9}, {
+   3.6820623307167463`*^9, 3.682062346185154*^9}, {3.6820723965382347`*^9, 
+   3.6820723968625317`*^9}, {3.6820741907138777`*^9, 3.682074198491898*^9}, 
+   3.6820743177790236`*^9, {3.682074609389701*^9, 3.6820746097610655`*^9}, {
+   3.6820747175033083`*^9, 3.6820747188955035`*^9}, {3.682074766136222*^9, 
+   3.6820747664567165`*^9}, {3.6820753325450583`*^9, 
+   3.6820753381564016`*^9}, {3.682075838535535*^9, 3.6820758446344013`*^9}, {
+   3.6821512714661636`*^9, 3.682151271871811*^9}, {3.6821521400894747`*^9, 
+   3.682152158592442*^9}, {3.682154790058881*^9, 3.6821547907940826`*^9}, {
+   3.6821549044962683`*^9, 3.6821549067407513`*^9}, {3.6821551149411283`*^9, 
+   3.6821551166242533`*^9}, {3.6821554631231937`*^9, 
+   3.6821554646559763`*^9}, {3.6821603031854753`*^9, 3.682160306079481*^9}, {
+   3.6821623209894395`*^9, 3.682162338168158*^9}, {3.6821623724364543`*^9, 
+   3.6821623808052464`*^9}, {3.6821631517802687`*^9, 
+   3.6821631544688673`*^9}, {3.6821632925486927`*^9, 
+   3.6821633110200377`*^9}, {3.6821643843046055`*^9, 
+   3.6821643890104666`*^9}, {3.6821651570675344`*^9, 
+   3.6821651618562927`*^9}, {3.6821652828040175`*^9, 
+   3.6821652925882316`*^9}, {3.682165936388157*^9, 3.682165936508657*^9}, {
+   3.6821664991324635`*^9, 3.682166511059744*^9}, {3.682166649837863*^9, 
+   3.6821666654843493`*^9}, {3.682166817542938*^9, 3.6821668188247037`*^9}, {
+   3.6821751278990803`*^9, 3.6821751328964787`*^9}, {3.6821753802996845`*^9, 
+   3.682175380984297*^9}, {3.682176032169323*^9, 3.682176045028284*^9}, {
+   3.6821766538662615`*^9, 3.6821766539492693`*^9}, {3.6821779423250957`*^9, 
+   3.6821779426250944`*^9}, {3.6822477074690857`*^9, 3.682247707969116*^9}, {
+   3.682248254597106*^9, 3.682248255036396*^9}, {3.68224835479431*^9, 
+   3.682248356045452*^9}, {3.6822555442404194`*^9, 3.6822555468334455`*^9}, {
+   3.6822598913231792`*^9, 3.6822598915329723`*^9}, {3.682261511539426*^9, 
+   3.682261516916931*^9}, {3.6822621402364836`*^9, 3.6822621474846635`*^9}, {
+   3.682267505921305*^9, 3.6822675063910675`*^9}, {3.6824387284059486`*^9, 
+   3.682438729697995*^9}, {3.6824392826492*^9, 3.682439284545909*^9}, {
+   3.685381219377717*^9, 3.6853812194477124`*^9}, {3.685381767140419*^9, 
+   3.6853817737287784`*^9}, {3.685382290064474*^9, 3.685382304581519*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Dynamic", "[", "t", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Dynamic", "[", 
+  RowBox[{"Length", "[", "driverData", "]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6819076912693963`*^9, 3.681907695238606*^9}, {
+  3.682167235122445*^9, 3.68216724141873*^9}}],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[CloudObject`Private`t, StandardForm],
+  ImageSizeCache->{7., {0., 8.}}]], "Output",
+ CellChangeTimes->{
+  3.681907696161517*^9, 3.68206194786827*^9, 3.682061982319714*^9, 
+   3.6820625008989916`*^9, 3.6821647776315837`*^9, 3.6821672421091676`*^9, 
+   3.682175139231907*^9, 3.6822477370044146`*^9, 3.682248392645581*^9, 
+   3.682250001987565*^9, 3.682250207526944*^9, 3.682250361202679*^9, 
+   3.682250736963817*^9, 3.682250930777149*^9, 3.6822524012992353`*^9, 
+   3.682255582119754*^9, 3.682259655497365*^9, 3.682259894605875*^9, 
+   3.682260036315279*^9, 3.682260378184909*^9, 3.6822612997030478`*^9, 
+   3.6822613828900337`*^9, 3.682261522184987*^9, 3.6822616966841245`*^9, 
+   3.6822618160932493`*^9, 3.682262152089016*^9, 3.682435469694377*^9, 
+   3.6853812427414155`*^9, 3.6853823196288757`*^9, {3.685382950721806*^9, 
+   3.6853829554413953`*^9}}],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[
+   Length[CloudObject`Private`driverData], StandardForm],
+  ImageSizeCache->{7., {0., 8.}}]], "Output",
+ CellChangeTimes->{
+  3.681907696161517*^9, 3.68206194786827*^9, 3.682061982319714*^9, 
+   3.6820625008989916`*^9, 3.6821647776315837`*^9, 3.6821672421091676`*^9, 
+   3.682175139231907*^9, 3.6822477370044146`*^9, 3.682248392645581*^9, 
+   3.682250001987565*^9, 3.682250207526944*^9, 3.682250361202679*^9, 
+   3.682250736963817*^9, 3.682250930777149*^9, 3.6822524012992353`*^9, 
+   3.682255582119754*^9, 3.682259655497365*^9, 3.682259894605875*^9, 
+   3.682260036315279*^9, 3.682260378184909*^9, 3.6822612997030478`*^9, 
+   3.6822613828900337`*^9, 3.682261522184987*^9, 3.6822616966841245`*^9, 
+   3.6822618160932493`*^9, 3.682262152089016*^9, 3.682435469694377*^9, 
+   3.6853812427414155`*^9, 3.6853823196288757`*^9, {3.685382950721806*^9, 
+   3.6853829554413953`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"While", "[", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "simulate", " ", "until", " ", "time", " ", "reaches", " ", "maximum"}], 
+     " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"t", "<", "tMax"}], ","}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Length", "[", "driverData", "]"}], ">", "0"}], ",", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "remove", " ", "drivers", " ", "which", " ", "are", " ", "in", " ", 
+       "exit", " ", "region"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{"deletionList", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", "#", "}"}], "&"}], "/@", 
+           RowBox[{"Key", "/@", 
+            RowBox[{"Pick", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"Keys", "[", "driverData", "]"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"inPolyQ", "[", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"driverData", "[", 
+                   RowBox[{"#", ",", "\"\<exitRegion\>\""}], "]"}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"driverData", "[", 
+                   RowBox[{"#", ",", "\"\<position\>\""}], "]"}]}], 
+                 "\[IndentingNewLine]", "]"}], "&"}], "/@", 
+               RowBox[{"Keys", "[", "driverData", "]"}]}], ",", 
+              "\[IndentingNewLine]", "True"}], "\[IndentingNewLine]", 
+             "]"}]}]}]}], "\[IndentingNewLine]", "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"deletionList", "\[NotEqual]", 
+           RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"driverData", "=", 
+            RowBox[{"Delete", "[", 
+             RowBox[{"driverData", ",", "deletionList"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{"rename", " ", "keys"}], " ", "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"driverData", "=", 
+            RowBox[{"Association", "[", 
+             RowBox[{"ReplacePart", "[", 
+              RowBox[{
+               RowBox[{"Normal", "[", "driverData", "]"}], ",", 
+               RowBox[{"Table", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"i", ",", "1"}], "}"}], "\[Rule]", "i"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"i", ",", "1", ",", 
+                   RowBox[{"Length", "[", "driverData", "]"}]}], "}"}]}], 
+                "]"}]}], "]"}], "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "*", " ", "cycle", " ", "through", " ", "preset", " ", "control", " ", 
+        "states"}], " ", "**)"}], "\[IndentingNewLine]", 
+      RowBox[{"If", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "controlIndicatorStateSeries", "]"}], ">", 
+          "0"}], "&&", 
+         RowBox[{
+          RowBox[{"Mod", "[", 
+           RowBox[{
+            RowBox[{"Length", "[", "controlIndicatorStateSeries", "]"}], ",", 
+            "period"}], "]"}], "\[Equal]", "0"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"stateCount", "\[Equal]", "3"}], ",", 
+          RowBox[{"stateCount", "=", "1"}], ",", 
+          RowBox[{"stateCount", "++"}]}], "]"}]}], "\[IndentingNewLine]", 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "update", " ", "control", " ", "state", " ", "for", " ", "time", " ", 
+        "t"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"controlIndicatorStateSeries", ",", 
+        RowBox[{"controlStatePreset", "[", "stateCount", "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"**", "**", " ", "Evaluate"}], " ", "for", " ", "all", " ", 
+         "drivers", " ", "1", " ", "time"}], "-", 
+        RowBox[{"step", " ", "dt"}]}], " ", "****)"}], "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Do", "[", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"designating", " ", "active", " ", "driver"}], ".."}], " ", 
+        "*)"}], 
+       RowBox[{
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"activeDriverPosition", "=", 
+             RowBox[{"driverData", "[", 
+              RowBox[{"i", ",", "\"\<position\>\""}], "]"}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"activeDriverRotation", "=", 
+             RowBox[{"driverData", "[", 
+              RowBox[{"i", ",", "\"\<rotation\>\""}], "]"}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"activeDriverSpeed", "=", 
+             RowBox[{"driverData", "[", 
+              RowBox[{"i", ",", "\"\<speed\>\""}], "]"}]}], ",", 
+            "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            RowBox[{"allDriverPosition", "=", 
+             RowBox[{"Values", "[", 
+              RowBox[{"driverData", "\[LeftDoubleBracket]", 
+               RowBox[{"All", ",", "\"\<position\>\""}], 
+               "\[RightDoubleBracket]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+            RowBox[{"allDriverSpeed", "=", 
+             RowBox[{"Values", "[", 
+              RowBox[{"driverData", "\[LeftDoubleBracket]", 
+               RowBox[{"All", ",", "\"\<speed\>\""}], 
+               "\[RightDoubleBracket]"}], "]"}]}]}], "\[IndentingNewLine]", 
+           "}"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{"**", 
+            RowBox[{
+            "*", " ", "begin", " ", "evaluating", " ", "for", " ", "active", 
+             " ", "driver"}]}], " ", "****)"}], "\[IndentingNewLine]", 
+          "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{"Compute", " ", "updating", " ", "values"}], " ", "*)"}], 
+          RowBox[{"With", "[", 
+           RowBox[{
+            RowBox[{
+            "{", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{"compute", " ", "new", " ", "speed"}], " ", "*)"}], 
+             RowBox[{
+              RowBox[{"v", "=", "\[IndentingNewLine]", 
+               RowBox[{"(*", " ", 
+                RowBox[{
+                "active", " ", "drivers", " ", "current", " ", "speed"}], " ",
+                 "*)"}], 
+               RowBox[{"activeDriverSpeed", "+", "\[IndentingNewLine]", 
+                RowBox[{"(*", " ", 
+                 RowBox[{"compute", " ", "change", " ", "in", " ", "speed"}], 
+                 " ", "*)"}], 
+                RowBox[{"(", "\[IndentingNewLine]", 
+                 RowBox[{"(*", " ", 
+                  RowBox[{"compute", " ", "acceleration"}], " ", "*)"}], 
+                 "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"IDM", "[", "\[IndentingNewLine]", 
+                   RowBox[{"(*", " ", 
+                    RowBox[{"active", " ", "driver", " ", "ID"}], " ", "*)"}],
+                    " ", 
+                   RowBox[{"i", ",", "\[IndentingNewLine]", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    "active", " ", "driver", " ", "current", " ", 
+                    "rotation"}], "*)"}], " ", "activeDriverRotation", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    "current", " ", "position", " ", "of", " ", "all", " ", 
+                    "drivers"}], " ", "*)"}], " ", "allDriverPosition", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    "current", " ", "speeds", " ", "of", " ", "all", " ", 
+                    "drivers"}], " ", "*)"}], " ", "allDriverSpeed", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    "attributes", " ", "of", " ", "active", " ", "driver"}], 
+                    " ", "*)"}], " ", 
+                    RowBox[{"driverData", "[", 
+                    RowBox[{"i", ",", "\"\<attributes\>\""}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    "positions", " ", "of", " ", "all", " ", "control", " ", 
+                    "points"}], " ", "*)"}], 
+                    RowBox[{
+                    "junctionData", "[", "\"\<controlPoints\>\"", "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    RowBox[{"active", " ", "driver", " ", "listen"}], "-", 
+                    RowBox[{
+                    "to", " ", "control", " ", "point", " ", "index"}]}], " ",
+                     "*)"}], 
+                    RowBox[{"driverData", "[", 
+                    RowBox[{"i", ",", "\"\<controlIndex\>\""}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(*", " ", 
+                    RowBox[{
+                    "current", " ", "state", " ", "of", " ", "all", " ", 
+                    "control", " ", "points"}], "*)"}], 
+                    RowBox[{
+                    RowBox[{"Last", "[", "controlIndicatorStateSeries", "]"}],
+                     "/.", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"\"\<GO\>\"", "\[Rule]", "0"}], ",", 
+                    RowBox[{"\"\<STOP\>\"", "\[Rule]", "1"}]}], "}"}]}]}], 
+                   "\[IndentingNewLine]", "]"}], "*", "dt"}], 
+                 "\[IndentingNewLine]", ")"}]}]}], ",", "\[IndentingNewLine]",
+               "\[IndentingNewLine]", "\[IndentingNewLine]", 
+              RowBox[{"(*", " ", 
+               RowBox[{"compute", " ", "steering"}], " ", "*)"}], 
+              RowBox[{"\[Theta]", "=", 
+               RowBox[{"steeringAngle", "[", 
+                RowBox[{"activeDriverPosition", ",", 
+                 RowBox[{"(*", " ", 
+                  RowBox[{
+                  "active", " ", "drivers", " ", "journey", " ", "path"}], 
+                  " ", "*)"}], 
+                 RowBox[{"driverData", "[", 
+                  RowBox[{"i", ",", "\"\<path\>\""}], "]"}]}], "]"}]}]}], 
+             "\[IndentingNewLine]", "\[IndentingNewLine]", "}"}], ",", 
+            RowBox[{"(*", " ", 
+             RowBox[{"end", " ", "of", " ", "updating", " ", "values"}], " ", 
+             "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{
+              RowBox[{"**", " ", "update"}], " ", "simulation"}], " ", 
+             "***)"}], "\[IndentingNewLine]", 
+            RowBox[{"(*", "**)"}], "\[IndentingNewLine]", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "record", " ", "active", " ", "drivers", " ", "new", " ", 
+              "position"}], " ", "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"driverData", "[", 
+               RowBox[{"(*", " ", 
+                RowBox[{"active", " ", "driver", " ", "ID"}], " ", "*)"}], 
+               RowBox[{"i", ",", "\"\<position\>\""}], "]"}], "+=", 
+              RowBox[{"{", 
+               RowBox[{"(*", "x", "*)"}], 
+               RowBox[{
+                RowBox[{"v", "*", 
+                 RowBox[{"Cos", "[", "\[Theta]", "]"}], "*", "dt"}], ",", 
+                RowBox[{"(*", "y", "*)"}], 
+                RowBox[{"v", "*", 
+                 RowBox[{"Sin", "[", "\[Theta]", "]"}], "*", "dt"}]}], 
+               "}"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{
+              "record", " ", "active", " ", "drivers", " ", "new", " ", 
+               "rotation"}], " ", "*)"}], "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"driverData", "[", 
+               RowBox[{"(*", " ", 
+                RowBox[{"active", " ", "driver", " ", "ID"}], " ", "*)"}], 
+               RowBox[{"i", ",", "\"\<rotation\>\""}], "]"}], "=", 
+              RowBox[{"(*", " ", 
+               RowBox[{"new", " ", "rotation"}], " ", "*)"}], "\[Theta]"}], 
+             ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{
+              "record", " ", "active", " ", "drivers", " ", "new", " ", 
+               "speed"}], " ", "*)"}], "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"driverData", "[", 
+               RowBox[{"(*", " ", 
+                RowBox[{"active", " ", "driver", " ", "ID"}], " ", "*)"}], 
+               " ", 
+               RowBox[{"i", ",", "\"\<speed\>\""}], "]"}], "=", 
+              RowBox[{"(*", " ", 
+               RowBox[{"new", " ", "speed"}], " ", "*)"}], "v"}], ";"}]}], 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}], 
+         "\[IndentingNewLine]", "]"}], ",", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "end", " ", "of", " ", "evaluating", " ", "current", " ", "active", 
+          " ", "driver"}], " ", "*)"}], "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", 
+          RowBox[{"Keys", "[", "driverData", "]"}]}], "}"}]}], 
+       RowBox[{"(*", " ", 
+        RowBox[{"designate", " ", "next", " ", "active", " ", "driver"}], " ",
+         "*)"}], " ", "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}], 
+      ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "end", " ", "of", " ", "evaluation", " ", "for", " ", "all", " ", 
+        "drivers", " ", "at", " ", "dt"}], " ", "*)"}], "\[IndentingNewLine]",
+       "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Append", " ", "current", " ", "state", " ", "to", " ", "list", " ", 
+        "for", " ", "animation"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", "\[IndentingNewLine]", 
+       RowBox[{"animationData", ",", "\[IndentingNewLine]", 
+        RowBox[{"Transpose", "[", 
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Values", "[", 
+            RowBox[{"driverData", "\[LeftDoubleBracket]", 
+             RowBox[{"All", ",", "\"\<position\>\""}], 
+             "\[RightDoubleBracket]"}], "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Values", "[", 
+            RowBox[{"driverData", "\[LeftDoubleBracket]", 
+             RowBox[{"All", ",", "\"\<rotation\>\""}], 
+             "\[RightDoubleBracket]"}], "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Values", "[", 
+            RowBox[{"driverData", "\[LeftDoubleBracket]", 
+             RowBox[{"All", ",", "\"\<color\>\""}], "\[RightDoubleBracket]"}],
+             "]"}]}], "\[IndentingNewLine]", "}"}], "]"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "add", " ", "new", " ", "driver", " ", "every", " ", "10", "s", " ", 
+        "if", " ", "count", " ", "below", " ", "limit"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"Mod", "[", 
+           RowBox[{
+            RowBox[{"IntegerPart", "[", 
+             RowBox[{"t", "/", "dt"}], "]"}], ",", "10"}], "]"}], "\[Equal]", 
+          "0"}], "&&", 
+         RowBox[{
+          RowBox[{"Length", "[", "driverData", "]"}], "<", "maxDrivers"}]}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"insertDriver", "[", 
+          RowBox[{"RandomChoice", "[", 
+           RowBox[{"Range", "[", 
+            RowBox[{"Length", "[", "insertionPoints", "]"}], "]"}], "]"}], 
+          "]"}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"insertDriver", "[", "3", "]"}]}], "\[IndentingNewLine]", 
+       "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"increment", " ", "time", " ", "t", " ", "by", " ", "dt"}], 
+       " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"t", "+=", "dt"}]}]}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.681901139116454*^9, 3.6819012172415147`*^9}, {
+   3.6819012592766848`*^9, 3.681901353880807*^9}, {3.6819013873552437`*^9, 
+   3.681901402123073*^9}, 3.681901446831822*^9, {3.681902534850111*^9, 
+   3.6819025795371437`*^9}, {3.681902743794267*^9, 3.6819028005992956`*^9}, {
+   3.6819028553762054`*^9, 3.6819028740691485`*^9}, {3.6819031420767045`*^9, 
+   3.6819033505406933`*^9}, {3.681903395296736*^9, 3.6819034659878907`*^9}, {
+   3.681903594022061*^9, 3.6819038750119114`*^9}, {3.681903914079589*^9, 
+   3.6819039636297655`*^9}, {3.6819041186145573`*^9, 
+   3.6819043241426315`*^9}, {3.6819043578649073`*^9, 
+   3.6819044592137747`*^9}, {3.6819045335947804`*^9, 3.6819046762579155`*^9}, 
+   3.6819050697144556`*^9, {3.6819073783575687`*^9, 3.68190738093869*^9}, {
+   3.6820622662743196`*^9, 3.682062269008111*^9}, {3.682062354077914*^9, 
+   3.6820623918453236`*^9}, {3.6820624540039277`*^9, 3.68206245637731*^9}, {
+   3.68206261451342*^9, 3.682062642468925*^9}, {3.6820732523227415`*^9, 
+   3.6820733143101745`*^9}, 3.682075510105315*^9, {3.6821521837683263`*^9, 
+   3.682152214294837*^9}, {3.6821522481652*^9, 3.6821522590604076`*^9}, 
+   3.6821524410810595`*^9, 3.682152497694666*^9, {3.6821526887967825`*^9, 
+   3.682152727928399*^9}, {3.6821545992336826`*^9, 3.682154611149151*^9}, {
+   3.682154762073138*^9, 3.6821547826502314`*^9}, {3.6821551518922987`*^9, 
+   3.682155160546133*^9}, {3.682155450819579*^9, 3.6821554521826477`*^9}, {
+   3.682160631850071*^9, 3.6821606588416257`*^9}, {3.682160714139737*^9, 
+   3.68216080918327*^9}, {3.682160845129541*^9, 3.6821609315034018`*^9}, {
+   3.6821609691297183`*^9, 3.682160996870821*^9}, {3.682161029515056*^9, 
+   3.682161103536053*^9}, {3.6821611366299295`*^9, 3.68216124291115*^9}, {
+   3.682161273138004*^9, 3.6821613328144484`*^9}, {3.682161389300644*^9, 
+   3.6821613933950167`*^9}, {3.682161531842244*^9, 3.682161538694005*^9}, {
+   3.6821615710188804`*^9, 3.6821615791592927`*^9}, {3.6821616100551424`*^9, 
+   3.6821617234811697`*^9}, {3.6821619541058335`*^9, 3.6821619744110103`*^9}, 
+   3.6821620808381867`*^9, {3.682162170273589*^9, 3.682162217684499*^9}, {
+   3.6821623959833946`*^9, 3.6821623989264083`*^9}, {3.68216243933224*^9, 
+   3.6821626167916746`*^9}, {3.6821629511087112`*^9, 3.682162952479847*^9}, {
+   3.68216302126886*^9, 3.6821630354625797`*^9}, {3.6821633585477476`*^9, 
+   3.6821633805355415`*^9}, 3.682163497216697*^9, {3.6821651190509214`*^9, 
+   3.682165129182366*^9}, 3.68216554616621*^9, {3.682165612564012*^9, 
+   3.682165652996992*^9}, {3.682165711468149*^9, 3.682165762476591*^9}, {
+   3.6821659054563074`*^9, 3.682165924680207*^9}, {3.682166188867612*^9, 
+   3.6821661895189705`*^9}, {3.6821665413530703`*^9, 3.682166558133398*^9}, {
+   3.682166635720332*^9, 3.682166636370103*^9}, {3.6821668743573837`*^9, 
+   3.68216689746278*^9}, {3.6821669675479145`*^9, 3.682167010585307*^9}, {
+   3.682167093473446*^9, 3.6821671090139265`*^9}, {3.682167148908336*^9, 
+   3.68216715188177*^9}, {3.682167194424281*^9, 3.6821672225681973`*^9}, {
+   3.682167349067319*^9, 3.682167351521305*^9}, {3.682167534409336*^9, 
+   3.6821675613024874`*^9}, {3.6821676879270926`*^9, 3.682167692593603*^9}, {
+   3.6821677615796003`*^9, 3.682167763912149*^9}, 3.6821706250246973`*^9, {
+   3.6821760083900557`*^9, 3.682176019452428*^9}, {3.6821760538931274`*^9, 
+   3.682176075410124*^9}, {3.6821775229373937`*^9, 3.6821775310195613`*^9}, {
+   3.682248265791749*^9, 3.6822482673930435`*^9}, {3.6822495880841255`*^9, 
+   3.6822496041028132`*^9}, {3.6822555688755274`*^9, 3.682255577385704*^9}, {
+   3.682262129606922*^9, 3.682262133049523*^9}, 3.682438183007333*^9, {
+   3.6824386745229225`*^9, 3.682438676104494*^9}, {3.6824392578850136`*^9, 
+   3.6824392619408646`*^9}, {3.685382490843258*^9, 3.6853824931209326`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CompiledFunction","cfne",
+   "\"Numerical error encountered; proceeding with uncompiled evaluation.\"",
+   2,275,78,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826040032806`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CompiledFunction","cfta",
+   "\"Argument \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"-\\\", \\\"3.665201475023576`\\\"}], \\\",\\\", \
+RowBox[{\\\"-\\\", \\\"18.072989064536365`\\\"}]}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"2.732080626042661`\\\", \\\",\\\", \
+\\\"21.569941927253126`\\\"}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"6\\\", \\\"\[RightSkeleton]\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", \
+RowBox[{\\\"4.74558422445090046237005469328566650738458`15.954589770191005*^\
+1004\\\", \\\",\\\", \
+\\\"2.1073357084652769754089985562111518591309779`15.954589770191005*^1006\\\"\
+}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.7283902065119205`\\\", \\\",\\\", \\\"52.91857727808315`\\\"}], \
+\\\"}\\\"}]}], \\\"}\\\"}]\\) at position \\!\\(\\*RowBox[{\\\"3\\\"}]\\) \
+should be a rank \\!\\(\\*RowBox[{\\\"2\\\"}]\\) tensor of \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"machine-size real number\\\\\\\"\\\"}]\\)s.\"",2,
+   275,79,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826040432835`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CompiledFunction","cfta",
+   "\"Argument \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"-\\\", \\\"3.665201475023576`\\\"}], \\\",\\\", \
+RowBox[{\\\"-\\\", \\\"18.072989064536365`\\\"}]}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"2.732080626042661`\\\", \\\",\\\", \
+\\\"21.569941927253126`\\\"}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"6\\\", \\\"\[RightSkeleton]\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", \
+RowBox[{\\\"4.74558422445090046237005469328566650738458`15.954589770191005*^\
+1004\\\", \\\",\\\", \
+\\\"2.1073357084652769754089985562111518591309779`15.954589770191005*^1006\\\"\
+}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.7283902065119205`\\\", \\\",\\\", \\\"52.91857727808315`\\\"}], \
+\\\"}\\\"}]}], \\\"}\\\"}]\\) at position \\!\\(\\*RowBox[{\\\"5\\\"}]\\) \
+should be a rank \\!\\(\\*RowBox[{\\\"2\\\"}]\\) tensor of \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"machine-size real number\\\\\\\"\\\"}]\\)s.\"",2,
+   275,80,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826040932817`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CompiledFunction","cfta",
+   "\"Argument \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"4.74558422445090046237005469328566650738458`15.954589770191005*^\
+1004\\\", \\\",\\\", \
+\\\"2.1073357084652769754089985562111518591309779`15.954589770191005*^1006\\\"\
+}], \\\"}\\\"}]\\) at position \\!\\(\\*RowBox[{\\\"2\\\"}]\\) should be a \
+rank \\!\\(\\*RowBox[{\\\"1\\\"}]\\) tensor of \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"machine-size real number\\\\\\\"\\\"}]\\)s.\"",2,
+   275,81,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382604133284*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"CompiledFunction\\\", \
+\\\"::\\\", \\\"cfta\\\"}], \\\"MessageName\\\"]\\) will be suppressed during \
+this calculation.\"",2,275,82,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826041732836`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "N","meprec",
+   "\"Internal precision limit $MaxExtraPrecision = \\!\\(\\*RowBox[{\\\"50.`\
+\\\"}]\\) reached while evaluating \\!\\(\\*RowBox[{\\\"16\\\", \\\" \\\", \
+SqrtBox[RowBox[{\\\"5\\\", \\\"-\\\", RowBox[{\\\"2\\\", \\\" \\\", \
+SqrtBox[\\\"5\\\"]}]}]]}]\\).\"",2,275,83,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382604323288*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "N","meprec",
+   "\"Internal precision limit $MaxExtraPrecision = \\!\\(\\*RowBox[{\\\"50.`\
+\\\"}]\\) reached while evaluating \\!\\(\\*RowBox[{RowBox[{\\\"-\\\", \\\"16\
+\\\"}], \\\" \\\", SqrtBox[RowBox[{\\\"5\\\", \\\"-\\\", RowBox[{\\\"2\\\", \
+\\\" \\\", SqrtBox[\\\"5\\\"]}]}]]}]\\).\"",2,275,84,29350433737132593919,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826043632917`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "N","meprec",
+   "\"Internal precision limit $MaxExtraPrecision = \\!\\(\\*RowBox[{\\\"50.`\
+\\\"}]\\) reached while evaluating \\!\\(\\*RowBox[{\\\"16\\\", \\\" \\\", \
+SqrtBox[RowBox[{\\\"5\\\", \\\"-\\\", RowBox[{\\\"2\\\", \\\" \\\", \
+SqrtBox[\\\"5\\\"]}]}]]}]\\).\"",2,275,85,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382604403292*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"N\\\", \\\"::\\\", \
+\\\"meprec\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,275,86,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826044432945`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Power","infy",
+   "\"Infinite expression \\!\\(\\*FractionBox[\\\"1\\\", \
+\\\"0``-990.6702840438364\\\"]\\) encountered.\"",2,275,87,
+   29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826044732943`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Nearest","neard",
+   "\"The default distance function does not give a real numeric distance \
+when applied to the point pair \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"21.800166794422974`\\\", \\\",\\\", \\\"656.3640684417744`\\\"}], \
+\\\"}\\\"}]\\) and \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"ComplexInfinity\\\", \\\",\\\", \\\"ComplexInfinity\\\"}], \
+\\\"}\\\"}]\\).\"",2,275,88,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382604513295*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Thread","tdlen",
+   "\"Objects of unequal length in \\!\\(\\*RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.73208062516183`\\\", \\\",\\\", \\\"21.569941594104154`\\\"}], \
+\\\"}\\\"}], \\\"+\\\", RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"653.3339765841745`\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"639.9732519404477`\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"640.7708547986821`\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"653.3971546472957`\\\"}]}], \\\"}\\\"}]}]\\) cannot be combined.\"",2,275,
+   89,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382604543294*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Thread","tdlen",
+   "\"Objects of unequal length in \\!\\(\\*RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.73208062516183`\\\", \\\",\\\", \\\"21.569941594104154`\\\"}], \
+\\\"}\\\"}], \\\"+\\\", RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"653.3339765841745`\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"639.9732519404477`\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"640.7708547986821`\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"653.3971546472957`\\\"}]}], \\\"}\\\"}]}]\\) cannot be combined.\"",2,275,
+   90,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382604583295*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Thread","tdlen",
+   "\"Objects of unequal length in \\!\\(\\*RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.73208062516183`\\\", \\\",\\\", \\\"21.569941594104154`\\\"}], \
+\\\"}\\\"}], \\\"+\\\", RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"653.3339765841745`\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"639.9732519404477`\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"640.7708547986821`\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"653.3971546472957`\\\"}]}], \\\"}\\\"}]}]\\) cannot be combined.\"",2,275,
+   91,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826046232967`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Thread\\\", \\\"::\\\", \
+\\\"tdlen\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,275,92,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826046632977`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Nearest","near1",
+   "\"\\!\\(\\*RowBox[{\\\"If\\\", \\\"[\\\", RowBox[{RowBox[{RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"\[NotEqual]\\\
+\", \\\"0\\\"}], \\\",\\\", \\\"1\\\", \\\",\\\", \\\"0\\\"}], \\\"]\\\"}]\\) \
+is neither a list of real points nor a valid list of rules.\"",2,275,93,
+   29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826046932983`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Pick","incomp",
+   "\"Expressions \\!\\(\\*RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\
+\[RightSkeleton]\\\"}]\\) and \\!\\(\\*RowBox[{\\\"Nearest\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{RowBox[{RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"-\\\
+\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}], \\\" \\\", \
+RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\\\"}], \
+\\\"+\\\", RowBox[{\\\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"}\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\
+\"(\\\", RowBox[{\\\"1\\\", \\\"-\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}]}], \\\")\\\"}]}], \\\"-\\\", RowBox[{RowBox[{\\\"(\\\", \
+RowBox[{\\\"1\\\", \\\"-\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\
+\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \
+\\\")\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\
+\\\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\
+\"}], \\\"}\\\"}], \\\"+\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\
+\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\
+\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}], \\\"+\\\", \
+RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\"]\\\"}]}], \\\"+\\\", RowBox[{\
+\\\"\[LeftSkeleton]\\\", \\\"6\\\", \\\"\[RightSkeleton]\\\"}], \\\"+\\\", \
+RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"-\\\", RowBox[{\\\"UnitStep\
+\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\
+\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}], \\\" \\\", \
+RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\\\"}], \
+\\\"+\\\", RowBox[{\\\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"}\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\
+\"(\\\", RowBox[{\\\"1\\\", \\\"-\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}]}], \\\")\\\"}]}], \\\"-\\\", RowBox[{RowBox[{\\\"(\\\", \
+RowBox[{\\\"1\\\", \\\"-\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\
+\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \
+\\\")\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\
+\\\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\
+\"}], \\\"}\\\"}], \\\"+\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\
+\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\
+\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}], \\\"+\\\", \
+RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\"]\\\"}]}]}], \\\"\[NotEqual]\\\
+\", \\\"0\\\"}], \\\",\\\", \\\"1\\\", \\\",\\\", \\\"0\\\"}], \\\"]\\\"}], \
+\\\",\\\", \\\"0\\\", \\\",\\\", \\\"0\\\"}], \\\"]\\\"}]\\) have \
+incompatible shapes.\"",2,275,94,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826047333*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Nearest","near1",
+   "\"\\!\\(\\*RowBox[{\\\"Pick\\\", \\\"[\\\", RowBox[{RowBox[{\\\"Nearest\\\
+\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\
+\[RightSkeleton]\\\"}], \\\"]\\\"}], \\\",\\\", RowBox[{\\\"Nearest\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{RowBox[{RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"+\\\
+\", RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}], \\\" \\\", \
+RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"Plus\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"+\\\
+\", RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}]}], \
+\\\"-\\\", RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"+\\\", \
+RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}], \\\" \\\", RowBox[{\\\
+\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}], \
+\\\"]\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"Plus\
+\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\
+\[RightSkeleton]\\\"}], \\\"]\\\"}], \\\"]\\\"}]}], \\\"+\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"6\\\", \\\"\[RightSkeleton]\\\"}], \\\"+\\\", \
+RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"+\\\", \
+RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}], \\\" \\\", RowBox[{\\\
+\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}], \
+\\\"]\\\"}], \\\" \\\", RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"+\\\", \
+RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}]}], \\\"-\\\", \
+RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"+\\\", \
+RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}], \\\" \\\", RowBox[{\\\
+\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}], \
+\\\"]\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"Plus\
+\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\
+\[RightSkeleton]\\\"}], \\\"]\\\"}], \\\"]\\\"}]}]}], \\\"\[NotEqual]\\\", \\\
+\"0\\\"}], \\\",\\\", \\\"1\\\", \\\",\\\", \\\"0\\\"}], \\\"]\\\"}], \\\",\\\
+\", \\\"0\\\", \\\",\\\", \\\"0\\\"}], \\\"]\\\"}], \\\",\\\", \\\"1\\\"}], \
+\\\"]\\\"}]\\) is neither a list of real points nor a valid list of rules.\"",
+   2,275,95,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826047433004`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partw",
+   "\"Part \\!\\(\\*RowBox[{\\\"1\\\"}]\\) of \\!\\(\\*RowBox[{\\\"{\\\", \
+\\\"}\\\"}]\\) does not exist.\"",2,275,96,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826047833014`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CompiledFunction","cfsa",
+   "\"Argument \\!\\(\\*RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) at \
+position \\!\\(\\*RowBox[{\\\"1\\\"}]\\) should be a \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"machine-size integer\\\\\\\"\\\"}]\\).\"",2,275,
+   97,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826048133016`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Infinity","indet",
+   "\"Indeterminate expression \\!\\(\\*RowBox[{\\\"0.`\\\", \\\" \\\", \
+\\\"ComplexInfinity\\\"}]\\) encountered.\"",2,275,98,29350433737132593919,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382604853302*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Infinity","indet",
+   "\"Indeterminate expression \\!\\(\\*RowBox[{\\\"0.`\\\", \\\" \\\", \
+\\\"ComplexInfinity\\\"}]\\) encountered.\"",2,275,99,29350433737132593919,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826048833036`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Infinity","indet",
+   "\"Indeterminate expression \\!\\(\\*RowBox[{\\\"ComplexInfinity\\\", \
+\\\"+\\\", \\\"ComplexInfinity\\\"}]\\) encountered.\"",2,275,100,
+   29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826049233065`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Infinity\\\", \
+\\\"::\\\", \\\"indet\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"",2,275,101,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382604953307*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","pkspec1",
+   "\"The expression \\!\\(\\*RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) \
+cannot be used as a part specification.\"",2,275,102,29350433737132593919,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382604983311*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Extract","psl1",
+   "\"Position specification \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"1\\\
+\", \\\"\[RightDoubleBracket]\\\"}], \\\"}\\\"}]\\) in \\!\\(\\*RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}]\\) is not \
+applicable.\"",2,275,103,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826050233064`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Nearest","neard",
+   "\"The default distance function does not give a real numeric distance \
+when applied to the point pair \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\
+\"-\\\", \\\"3.6652329351242416`\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"18.022994060305546`\\\"}]}], \\\"}\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{\\\"ComplexInfinity\\\", \\\",\\\", \
+\\\"ComplexInfinity\\\"}], \\\"}\\\"}]\\).\"",2,275,104,29350433737132593919,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382605053312*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Nearest","near1",
+   "\"\\!\\(\\*RowBox[{\\\"If\\\", \\\"[\\\", RowBox[{RowBox[{RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"\[NotEqual]\\\
+\", \\\"0\\\"}], \\\",\\\", \\\"1\\\", \\\",\\\", \\\"0\\\"}], \\\"]\\\"}]\\) \
+is neither a list of real points nor a valid list of rules.\"",2,275,105,
+   29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826050933094`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Nearest\\\", \
+\\\"::\\\", \\\"near1\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"",2,275,106,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826051233096`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Pick","incomp",
+   "\"Expressions \\!\\(\\*RowBox[{\\\"Nearest\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"-\\\
+\", \\\"3.6652329351242416`\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \
+\\\"18.022994060305546`\\\"}]}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.73208062516183`\\\", \\\",\\\", \\\"21.569941594104154`\\\"}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"6\\\", \\\"\
+\[RightSkeleton]\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"ComplexInfinity\\\", \\\",\\\", \\\"ComplexInfinity\\\"}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{RowBox[{\\\"21.800166794422974`\\\", \
+\\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"0.0031589031560614518`\\\", \\\" \\\", RowBox[{\\\"(\\\", \
+RowBox[{RowBox[{\\\"-\\\", \\\"6037.467958242161`\\\"}], \\\"+\\\", \
+RowBox[{\\\"0.1`\\\", \\\" \\\", RowBox[{\\\"If\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"3\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}]}], \
+\\\")\\\"}]}]}], \\\",\\\", RowBox[{RowBox[{\\\"656.3640684417744`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"-\\\", RowBox[{\\\"0.09995009420130942`\\\", \\\" \
+\\\", RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"6037.467958242161`\\\"}], \\\"+\\\", RowBox[{\\\"0.1`\\\", \\\" \\\", \
+RowBox[{\\\"If\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"3\\\", \\\
+\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}]}], \\\")\\\"}]}]}]}], \\\"}\\\"}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\
+\[RightSkeleton]\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"All\\\", \\\
+\",\\\", \\\"20\\\"}], \\\"}\\\"}]}], \\\"]\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"Nearest\\\", \\\"[\\\", RowBox[{RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{RowBox[{RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\
+\", \\\"-\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\
+\")\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\\\
+\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"}\\\"}], \\\"+\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\
+\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"-\
+\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}]}], \
+\\\"-\\\", RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"-\\\", \
+RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\
+\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}], \\\" \\\", \
+RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\\\"}], \
+\\\"+\\\", RowBox[{\\\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"}\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\
+\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\
+\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}], \
+\\\"+\\\", RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\"]\\\"}]}], \
+\\\"+\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"6\\\", \\\"\[RightSkeleton]\\\
+\"}], \\\"+\\\", RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"-\\\", \
+RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\
+\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}], \\\" \\\", \
+RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\\\"}], \
+\\\"+\\\", RowBox[{\\\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"}\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\
+\"(\\\", RowBox[{\\\"1\\\", \\\"-\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}]}], \\\")\\\"}]}], \\\"-\\\", RowBox[{RowBox[{\\\"(\\\", \
+RowBox[{\\\"1\\\", \\\"-\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\
+\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \
+\\\")\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\
+\\\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\
+\"}], \\\"}\\\"}], \\\"+\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\
+\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\
+\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}], \\\"+\\\", \
+RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\"]\\\"}]}]}], \\\"\[NotEqual]\\\
+\", \\\"0\\\"}], \\\",\\\", \\\"1\\\", \\\",\\\", \\\"0\\\"}], \\\"]\\\"}], \
+\\\",\\\", \\\"0\\\", \\\",\\\", \\\"0\\\"}], \\\"]\\\"}]\\) have \
+incompatible shapes.\"",2,275,107,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382605163312*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partw",
+   "\"Part \\!\\(\\*RowBox[{\\\"1\\\"}]\\) of \\!\\(\\*RowBox[{\\\"{\\\", \
+\\\"}\\\"}]\\) does not exist.\"",2,275,108,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826052033124`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CompiledFunction","cfsa",
+   "\"Argument \\!\\(\\*RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) at \
+position \\!\\(\\*RowBox[{\\\"1\\\"}]\\) should be a \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"machine-size integer\\\\\\\"\\\"}]\\).\"",2,275,
+   109,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826052333117`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","pkspec1",
+   "\"The expression \\!\\(\\*RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) \
+cannot be used as a part specification.\"",2,275,110,29350433737132593919,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826052733154`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Extract","psl1",
+   "\"Position specification \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"1\\\
+\", \\\"\[RightDoubleBracket]\\\"}], \\\"}\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"Extract\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"-\\\", \\\"3.6652329351242416`\
+\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \\\"18.022994060305546`\\\"}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"2.73208062516183`\\\", \
+\\\",\\\", \\\"21.569941594104154`\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"6\\\", \\\"\[RightSkeleton]\\\"}], \\\",\
+\\\", RowBox[{\\\"{\\\", RowBox[{\\\"ComplexInfinity\\\", \\\",\\\", \
+\\\"ComplexInfinity\\\"}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{RowBox[{\\\"21.800166794422974`\\\", \
+\\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"0.0031589031560614518`\\\", \\\" \\\", RowBox[{\\\"(\\\", \
+RowBox[{RowBox[{\\\"-\\\", \\\"6037.467958242161`\\\"}], \\\"+\\\", \
+RowBox[{\\\"0.1`\\\", \\\" \\\", RowBox[{\\\"If\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"3\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}]}], \
+\\\")\\\"}]}]}], \\\",\\\", RowBox[{RowBox[{\\\"656.3640684417744`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"-\\\", RowBox[{\\\"0.09995009420130942`\\\", \\\" \
+\\\", RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"6037.467958242161`\\\"}], \\\"+\\\", RowBox[{\\\"0.1`\\\", \\\" \\\", \
+RowBox[{\\\"If\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"3\\\", \\\
+\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}]}], \\\")\\\"}]}]}]}], \\\"}\\\"}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \\\"}\\\
+\"}], \\\"\[LeftDoubleBracket]\\\", \\\"1\\\", \
+\\\"\[RightDoubleBracket]\\\"}], \\\"}\\\"}]}], \\\"]\\\"}]\\) is not \
+applicable.\"",2,275,111,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826053133154`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","pkspec1",
+   "\"The expression \\!\\(\\*RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) \
+cannot be used as a part specification.\"",2,275,112,29350433737132593919,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826053533163`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Part\\\", \\\"::\\\", \
+\\\"pkspec1\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,275,113,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382605383318*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Extract","psl1",
+   "\"Position specification \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"1\\\
+\", \\\"\[RightDoubleBracket]\\\"}], \\\"}\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"Extract\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"-\\\", \\\"3.6652329351242416`\
+\\\"}], \\\",\\\", RowBox[{\\\"-\\\", \\\"18.022994060305546`\\\"}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"2.73208062516183`\\\", \
+\\\",\\\", \\\"21.569941594104154`\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"6\\\", \\\"\[RightSkeleton]\\\"}], \\\",\
+\\\", RowBox[{\\\"{\\\", RowBox[{\\\"ComplexInfinity\\\", \\\",\\\", \
+\\\"ComplexInfinity\\\"}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{RowBox[{\\\"21.800166794422974`\\\", \
+\\\"\[VeryThinSpace]\\\"}], \\\"-\\\", \
+RowBox[{\\\"0.0031589031560614518`\\\", \\\" \\\", RowBox[{\\\"(\\\", \
+RowBox[{RowBox[{\\\"-\\\", \\\"6037.467958242161`\\\"}], \\\"+\\\", \
+RowBox[{\\\"0.1`\\\", \\\" \\\", RowBox[{\\\"If\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"3\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}]}], \
+\\\")\\\"}]}]}], \\\",\\\", RowBox[{RowBox[{\\\"656.3640684417744`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"-\\\", RowBox[{\\\"0.09995009420130942`\\\", \\\" \
+\\\", RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"6037.467958242161`\\\"}], \\\"+\\\", RowBox[{\\\"0.1`\\\", \\\" \\\", \
+RowBox[{\\\"If\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"3\\\", \\\
+\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}]}], \\\")\\\"}]}]}]}], \\\"}\\\"}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \\\"}\\\
+\"}], \\\"\[LeftDoubleBracket]\\\", \\\"1\\\", \
+\\\"\[RightDoubleBracket]\\\"}], \\\"}\\\"}]}], \\\"]\\\"}]\\) is not \
+applicable.\"",2,275,114,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382605423319*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Extract\\\", \
+\\\"::\\\", \\\"psl1\\\"}], \\\"MessageName\\\"]\\) will be suppressed during \
+this calculation.\"",2,275,115,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.68538260546332*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Nearest","neard",
+   "\"The default distance function does not give a real numeric distance \
+when applied to the point pair \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"2.73208062516183`\\\", \\\",\\\", \\\"21.569941594104154`\\\"}], \
+\\\"}\\\"}]\\) and \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{RowBox[{\\\"-\\\", \\\"3.6652329351242416`\\\"}], \\\"-\\\", \
+RowBox[{\\\"0.00006292647619640708`\\\", \\\" \\\", RowBox[{\\\"(\\\", \
+RowBox[{RowBox[{\\\"0.49995014129186205`\\\", \\\"\[VeryThinSpace]\\\"}], \
+\\\"+\\\", RowBox[{\\\"0.1`\\\", \\\" \\\", RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{RowBox[{\\\"Part\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}], \\\"\[NotEqual]\\\", \\\"0\\\"}], \\\",\\\", RowBox[{\\\"0.1`\\\", \\\
+\" \\\", RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\
+\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\",\\\", \
+RowBox[{\\\"0.1`\\\", \\\" \\\", RowBox[{\\\"Plus\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}]}]}], \\\"]\\\"}]}]}], \\\")\\\"}]}]}], \\\",\\\", \
+RowBox[{RowBox[{\\\"-\\\", \\\"18.022994060305546`\\\"}], \\\"+\\\", RowBox[{\
+\\\"0.09999998020129101`\\\", \\\" \\\", RowBox[{\\\"(\\\", \
+RowBox[{RowBox[{\\\"0.49995014129186205`\\\", \\\"\[VeryThinSpace]\\\"}], \
+\\\"+\\\", RowBox[{\\\"0.1`\\\", \\\" \\\", RowBox[{\\\"If\\\", \\\"[\\\", \
+RowBox[{RowBox[{RowBox[{\\\"Part\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}], \\\"\[NotEqual]\\\", \\\"0\\\"}], \\\",\\\", RowBox[{\\\"0.1`\\\", \\\
+\" \\\", RowBox[{\\\"Plus\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\
+\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\",\\\", \
+RowBox[{\\\"0.1`\\\", \\\" \\\", RowBox[{\\\"Plus\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}]}]}], \\\"]\\\"}]}]}], \\\")\\\"}]}]}]}], \\\"}\\\"}]\\).\"",2,275,116,
+   29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382605493325*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Nearest\\\", \
+\\\"::\\\", \\\"neard\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"",2,275,117,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382605543325*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Pick","incomp",
+   "\"Expressions \\!\\(\\*RowBox[{\\\"Nearest\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]\\) \
+and \\!\\(\\*RowBox[{\\\"Nearest\\\", \\\"[\\\", RowBox[{RowBox[{\\\"If\\\", \
+\\\"[\\\", RowBox[{RowBox[{RowBox[{RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\
+\", \\\"-\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\
+\")\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\\\
+\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"}\\\"}], \\\"+\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\
+\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"-\
+\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}]}], \
+\\\"-\\\", RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"-\\\", \
+RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\
+\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}], \\\" \\\", \
+RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\\\"}], \
+\\\"+\\\", RowBox[{\\\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"}\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\
+\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\
+\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}], \
+\\\"+\\\", RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\"]\\\"}]}], \
+\\\"+\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"6\\\", \\\"\[RightSkeleton]\\\
+\"}], \\\"+\\\", RowBox[{RowBox[{\\\"(\\\", RowBox[{\\\"1\\\", \\\"-\\\", \
+RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\
+\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\")\\\"}], \\\" \\\", \
+RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\\\"}], \
+\\\"+\\\", RowBox[{\\\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"}\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\
+\"(\\\", RowBox[{\\\"1\\\", \\\"-\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\
+\\\"}]}], \\\")\\\"}]}], \\\"-\\\", RowBox[{RowBox[{\\\"(\\\", \
+RowBox[{\\\"1\\\", \\\"-\\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{\\\
+\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \
+\\\")\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", RowBox[{RowBox[{\
+\\\"{\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \\\"\[RightSkeleton]\\\
+\"}], \\\"}\\\"}], \\\"+\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"4\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\
+\\\"}]}], \\\"]\\\"}], \\\" \\\", RowBox[{\\\"UnitStep\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\
+\"2\\\", \\\"\[RightSkeleton]\\\"}], \\\"]\\\"}], \\\"+\\\", \
+RowBox[{\\\"Times\\\", \\\"[\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"2\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\"]\\\"}]}], \\\"]\\\"}]}]}], \\\"\[NotEqual]\\\
+\", \\\"0\\\"}], \\\",\\\", \\\"1\\\", \\\",\\\", \\\"0\\\"}], \\\"]\\\"}], \
+\\\",\\\", \\\"0\\\", \\\",\\\", \\\"0\\\"}], \\\"]\\\"}]\\) have \
+incompatible shapes.\"",2,275,118,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826056233225`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Pick\\\", \\\"::\\\", \
+\\\"incomp\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,275,119,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382605753327*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partw",
+   "\"Part \\!\\(\\*RowBox[{\\\"1\\\"}]\\) of \\!\\(\\*RowBox[{\\\"{\\\", \
+\\\"}\\\"}]\\) does not exist.\"",2,275,120,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.6853826058533306`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Part\\\", \\\"::\\\", \
+\\\"partw\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,275,121,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382605933332*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CompiledFunction","cfsa",
+   "\"Argument \\!\\(\\*RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) at \
+position \\!\\(\\*RowBox[{\\\"1\\\"}]\\) should be a \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"machine-size integer\\\\\\\"\\\"}]\\).\"",2,275,
+   122,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382606313345*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"CompiledFunction\\\", \
+\\\"::\\\", \\\"cfsa\\\"}], \\\"MessageName\\\"]\\) will be suppressed during \
+this calculation.\"",2,275,123,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.685381267630394*^9, 3.6853822054223003`*^9, 
+  3.68538234200848*^9, 3.685382606443346*^9}],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellChangeTimes->{3.685381271248446*^9, 3.6853822087957354`*^9, 
+  3.6853823459922175`*^9, 3.6853826115882072`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Graphics", "[", 
+    RowBox[{
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"junctionData", "[", "\"\<graphics\>\"", "]"}], ",", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{"control", " ", "points"}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", "indicators", " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"Transpose", "[", 
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+           "controlIndicatorStateSeries", "\[LeftDoubleBracket]", "T", 
+            "\[RightDoubleBracket]"}], "/.", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\"\<GO\>\"", "\[Rule]", "Green"}], ",", 
+             RowBox[{"\"\<STOP\>\"", "\[Rule]", "Red"}]}], "}"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Disk", "[", 
+             RowBox[{"#", ",", "1"}], "]"}], "&"}], "/@", 
+           RowBox[{"junctionData", "[", "\"\<controlPoints\>\"", "]"}]}]}], 
+         "\[IndentingNewLine]", "}"}], "]"}], ",", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"car", "@@@", 
+        RowBox[{
+        "animationData", "\[LeftDoubleBracket]", "T", 
+         "\[RightDoubleBracket]"}]}]}], 
+      RowBox[{"(*", 
+       RowBox[{",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Hue", "[", 
+           RowBox[{"1", ",", "1", ",", "1", ",", "0.2"}], "]"}], ",", 
+          RowBox[{"Polygon", "/@", 
+           RowBox[{"fov", "@@@", 
+            RowBox[{"Transpose", "@", 
+             RowBox[{"Most", "[", 
+              RowBox[{"Transpose", "@", 
+               RowBox[{
+               "animationData", "\[LeftDoubleBracket]", "T", 
+                "\[RightDoubleBracket]"}]}], "]"}]}]}]}]}], "}"}]}], "*)"}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "5"}], ",", "42"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "67"}], ",", "54"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"T", ",", "1", ",", 
+     RowBox[{
+      RowBox[{"Length", "[", "animationData", "]"}], "-", "1"}], ",", "1"}], 
+    "}"}]}], "\[IndentingNewLine]", "]"}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`T$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`T$$], 1, 957, 1}}, Typeset`size$$ = {
+    168., {213., 219.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`T$253148$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`T$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`T$$, $CellContext`T$253148$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Graphics[{
+         $CellContext`junctionData["graphics"], 
+         Transpose[{
+           ReplaceAll[
+            
+            Part[$CellContext`controlIndicatorStateSeries, $CellContext`T$$], \
+{"GO" -> Green, "STOP" -> Red}], 
+           Map[Disk[#, 1]& , 
+            $CellContext`junctionData["controlPoints"]]}], 
+         Apply[$CellContext`car, 
+          Part[$CellContext`animationData, $CellContext`T$$], {1}]}, 
+        PlotRange -> {{-5, 42}, {-67, 54}}], 
+      "Specifications" :> {{$CellContext`T$$, 1, 957, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{257., {259., 266.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.682439107643551*^9, 3.682439183742638*^9, 
+  3.6824393810013256`*^9, 3.682439461634129*^9, 3.682439616320243*^9, 
+  3.685382620818204*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", "save", " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Export", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+        "\"\<simulationData2.JSON\>\""}], "}"}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"<|", 
+      RowBox[{
+       RowBox[{"\"\<simData\>\"", "\[Rule]", 
+        RowBox[{"Compress", "@", "driverData"}]}], ",", 
+       RowBox[{"\"\<animationDrivers\>\"", "\[Rule]", 
+        RowBox[{"Compress", "@", "animationData"}]}], ",", 
+       RowBox[{"\"\<animationSignals\>\"", "\[Rule]", 
+        RowBox[{"Compress", "@", "controlIndicatorStateSeries"}]}]}], 
+      "|>"}]}], "\[IndentingNewLine]", "]"}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.6821792627099514`*^9, 3.6821792686893034`*^9}, {
+  3.682179309898466*^9, 3.6821793127605658`*^9}, {3.6821793906452217`*^9, 
+  3.6821794188792143`*^9}, {3.6821795435453086`*^9, 3.682179571563139*^9}, {
+  3.6821796335272694`*^9, 3.6821796426582966`*^9}, {3.6821797102563524`*^9, 
+  3.6821797274953775`*^9}, {3.6821798473392363`*^9, 3.682179902725396*^9}, {
+  3.6822475612812443`*^9, 3.682247620694361*^9}, {3.6822692242178226`*^9, 
+  3.6822692243078403`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"animationData", "[", 
+  RowBox[{"[", "1", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.68538292832662*^9, 3.685382930486682*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partd",
+   "\"Part specification \\!\\(\\*RowBox[{\\\"animationData\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"",2,277,124,29350433737132593919,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6853829309066925`*^9}],
+
+Cell[BoxData[
+ RowBox[{"animationData", "\[LeftDoubleBracket]", "1", 
+  "\[RightDoubleBracket]"}]], "Output",
+ CellChangeTimes->{3.6853829309066925`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["animationData"], "Input",
+ CellChangeTimes->{{3.685382935604107*^9, 3.685382936544134*^9}}],
+
+Cell[BoxData["animationData"], "Output",
+ CellChangeTimes->{3.6853829368741417`*^9}]
+}, Open  ]]
+},
+WindowSize->{681, 716},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 482, 10, 50, "Input"],
+Cell[1043, 32, 5164, 119, 601, "Input"],
+Cell[6210, 153, 71515, 1587, 9457, "Input"],
+Cell[77728, 1742, 6611, 124, 734, "Input"],
+Cell[CellGroupData[{
+Cell[84364, 1870, 281, 5, 50, "Input"],
+Cell[84648, 1877, 887, 14, 30, "Output"],
+Cell[85538, 1893, 908, 15, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[86483, 1913, 20849, 419, 2349, "Input"],
+Cell[107335, 2334, 333, 7, 21, "Message"],
+Cell[107671, 2343, 1230, 21, 90, "Message"],
+Cell[108904, 2366, 1230, 21, 90, "Message"],
+Cell[110137, 2389, 682, 13, 48, "Message"],
+Cell[110822, 2404, 422, 8, 21, "Message"],
+Cell[111247, 2414, 496, 9, 30, "Message"],
+Cell[111746, 2425, 523, 10, 30, "Message"],
+Cell[112272, 2437, 496, 9, 30, "Message"],
+Cell[112771, 2448, 409, 8, 21, "Message"],
+Cell[113183, 2458, 355, 8, 41, "Message"],
+Cell[113541, 2468, 600, 11, 39, "Message"],
+Cell[114144, 2481, 727, 13, 39, "Message"],
+Cell[114874, 2496, 727, 13, 39, "Message"],
+Cell[115604, 2511, 729, 13, 39, "Message"],
+Cell[116336, 2526, 413, 8, 21, "Message"],
+Cell[116752, 2536, 546, 10, 21, "Message"],
+Cell[117301, 2548, 3826, 54, 107, "Message"],
+Cell[121130, 2604, 3219, 46, 90, "Message"],
+Cell[124352, 2652, 351, 7, 21, "Message"],
+Cell[124706, 2661, 529, 10, 21, "Message"],
+Cell[125238, 2673, 366, 8, 21, "Message"],
+Cell[125607, 2683, 368, 8, 21, "Message"],
+Cell[125978, 2693, 381, 8, 21, "Message"],
+Cell[126362, 2703, 414, 8, 21, "Message"],
+Cell[126779, 2713, 439, 9, 21, "Message"],
+Cell[127221, 2724, 546, 10, 21, "Message"],
+Cell[127770, 2736, 648, 12, 39, "Message"],
+Cell[128421, 2750, 547, 10, 21, "Message"],
+Cell[128971, 2762, 415, 8, 21, "Message"],
+Cell[129389, 2772, 5389, 76, 158, "Message"],
+Cell[134781, 2850, 352, 7, 21, "Message"],
+Cell[135136, 2859, 530, 10, 21, "Message"],
+Cell[135669, 2871, 441, 9, 21, "Message"],
+Cell[136113, 2882, 2091, 32, 73, "Message"],
+Cell[138207, 2916, 441, 9, 21, "Message"],
+Cell[138651, 2927, 412, 8, 21, "Message"],
+Cell[139066, 2937, 2089, 32, 73, "Message"],
+Cell[141158, 2971, 411, 8, 21, "Message"],
+Cell[141572, 2981, 2237, 34, 73, "Message"],
+Cell[143812, 3017, 413, 8, 21, "Message"],
+Cell[144228, 3027, 3880, 54, 107, "Message"],
+Cell[148111, 3083, 411, 8, 21, "Message"],
+Cell[148525, 3093, 352, 7, 21, "Message"],
+Cell[148880, 3102, 410, 8, 21, "Message"],
+Cell[149293, 3112, 528, 10, 21, "Message"],
+Cell[149824, 3124, 421, 8, 21, "Message"],
+Cell[150248, 3134, 152, 2, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[150437, 3141, 2603, 66, 392, "Input"],
+Cell[153043, 3209, 2125, 45, 542, "Output"]
+}, Open  ]],
+Cell[155183, 3257, 1304, 27, 126, "Input"],
+Cell[CellGroupData[{
+Cell[156512, 3288, 154, 3, 30, "Input"],
+Cell[156669, 3293, 352, 7, 21, "Message"],
+Cell[157024, 3302, 153, 3, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[157214, 3310, 105, 1, 30, "Input"],
+Cell[157322, 3313, 84, 1, 63, "Output"]
+}, Open  ]]
+}
+]
+*)
+
